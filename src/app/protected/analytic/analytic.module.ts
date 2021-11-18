@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module'; 
 
 import { AnalyticRoutingModule } from './analytic-routing.module';
 
@@ -7,7 +7,7 @@ import { AnalyticRoutingModule } from './analytic-routing.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    SharedModule,
     AnalyticRoutingModule
   ]
 })
