@@ -4,13 +4,12 @@ import { PublicModule } from '../public/public.module';
 import { ProtectedModule } from '../protected/protected.module';
 
 
-
 @NgModule({
   declarations: [],
   imports: [
     CommonModule,
     PublicModule,
-    ProtectedModule
+    ProtectedModule,
   ]
 })
 export class CoreModule { 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 import { PublicRoutingModule } from './public-routing.module';
 import { AuthModule } from './auth/auth.module';
@@ -8,7 +8,7 @@ import { AuthModule } from './auth/auth.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    SharedModule,
     PublicRoutingModule,
     AuthModule
   ]
