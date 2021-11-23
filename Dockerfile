@@ -10,7 +10,7 @@ RUN npm run build
 
 FROM nginx:latest
 
-COPY --from=build /usr/local/app/dist/samson-dashoard /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/samson-dashboard /usr/share/nginx/html
 
 #RUN mkdir /etc/apache2
 #COPY .htpasswd /etc/apache2/
