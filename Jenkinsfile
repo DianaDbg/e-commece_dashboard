@@ -140,24 +140,24 @@ pipeline {
       script {
         sh 'echo Consulter votre application web : http://'+hostToDeploy+':'+portContainer
         slackSend (channel: "jenkins_notifications", color: "good", message: """hi @team
-                                                                            \n\n*Status*: _Build deployed successfully_ *"""+nomProjet+"""*,  
-                                                                            *Project/branch*: ${env.JOB_NAME},
-                                                                            *URL*: http://"""+hostToDeploy+""":"""+portContainer+"""  
-                                                                            *Build-number*: ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)
-                                                                            *Comitted by*: ${env.GIT_AUTHOR}  
-                                                                            *Last commit message*: '${env.GIT_COMMIT_MSG}'
-                                                                            \n\n_Cordialement la @team DevOps ft Jenkins_""")
+                                                                  \n\n*Status*: _Build deployed successfully_ *"""+nomProjet+"""*,  
+                                                                  *Project/branch*: ${env.JOB_NAME},
+                                                                  *URL*: http://"""+hostToDeploy+""":"""+portContainer+"""  
+                                                                  *Build-number*: ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)
+                                                                  *Comitted by*: ${env.GIT_AUTHOR}  
+                                                                  *Last commit message*: '${env.GIT_COMMIT_MSG}'
+                                                                  \n\n_Cordialement la @team DevOps ft Jenkins_""")
       }
     }
     failure {
         //slackSend failOnError:true, message: "status: Build failed,  \nmicro-service: ${env.JOB_NAME},  \nbuild-number: ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
         slackSend (failOnError:true, channel: "jenkins_notifications", color: "danger", message: """hi @team
-                                                                            \n\n*status*: _Build failed_ *"""+nomProjet+"""*,  
-                                                                            *Project/branch*: ${env.JOB_NAME},  
-                                                                            *build-number*: ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)
-                                                                            *Comitted by*: ${env.GIT_AUTHOR}  
-                                                                            *Last commit message*: '${env.GIT_COMMIT_MSG}'
-                                                                            \n\n_Cordialement la @team DevOps ft Jenkins_""")
+                                                                  \n\n*status*: _Build failed_ *"""+nomProjet+"""*,  
+                                                                  *Project/branch*: ${env.JOB_NAME},  
+                                                                  *build-number*: ${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)
+                                                                  *Comitted by*: ${env.GIT_AUTHOR}  
+                                                                  *Last commit message*: '${env.GIT_COMMIT_MSG}'
+                                                                  \n\n_Cordialement la @team DevOps ft Jenkins_""")
     }
   }
 }
