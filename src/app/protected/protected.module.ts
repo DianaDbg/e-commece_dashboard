@@ -19,6 +19,15 @@ import { AnalyticModule } from './analytic/analytic.module';
     OrderModule,
     CustomerModule,
     AnalyticModule
+  ],
+  exports: [
+    SharedModule,
+    ProtectedRoutingModule,
+    DashboardModule,
+    ProductModule,
+    OrderModule,
+    CustomerModule,
+    AnalyticModule
   ]
 })
 export class ProtectedModule { }
