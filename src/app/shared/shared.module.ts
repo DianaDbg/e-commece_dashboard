@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -32,6 +33,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatPaginatorModule,
     MatSortModule,
     MatTableModule,
+    NgxDatatableModule
   ],
   exports: [
     RouterModule,
@@ -45,6 +47,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatMenuModule,
     MatPaginatorModule,
     MatTableModule,
+    NgxDatatableModule
   ],
 })
 export class SharedModule {}
