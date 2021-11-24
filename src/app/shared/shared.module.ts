@@ -11,7 +11,9 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -26,7 +28,10 @@ import { MatMenuModule } from '@angular/material/menu';
     MatSidenavModule,
     MatListModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatTableModule,
   ],
   exports: [
     RouterModule,
@@ -37,7 +42,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatButtonModule,
     SidebarComponent,
     MatGridListModule,
-    MatMenuModule
-  ]
+    MatMenuModule,
+    MatPaginatorModule,
+    MatTableModule,
+  ],
 })
-export class SharedModule { }
+export class SharedModule {}

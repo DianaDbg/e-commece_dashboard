@@ -4,7 +4,7 @@
 }
 
 .sidenav {
-  width: 200px;
+  width: 240px;
   background-color: #140E00;
 
   mat-nav-list {
@@ -14,10 +14,10 @@
     a {
       color: #929292;
 
-      &:focus {
+      &.active {
         color: #E6A20E;
         border-left: 4px solid #E6A20E;
-        background-color: #79797912;
+        background-color: #9c9c9c12;
       }
 
       mat-icon {
