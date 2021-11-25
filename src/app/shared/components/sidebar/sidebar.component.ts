@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -9,9 +10,7 @@ import { map, shareReplay } from 'rxjs/operators';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
-
-  @Input()
-  title!: string;
+  name: string = '';
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -19,6 +18,14 @@ export class SidebarComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute) {
+    
+  }
+  
+  ngOnInit() {
+  // this.route.queryParams.subscribe(params => {
+  //   this.name = params['outlet'];
+  // });
+  }
 
 }
