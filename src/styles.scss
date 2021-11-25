@@ -1,8 +1,39 @@
-@import 'samson-material-theme';
+@import "samson-material-theme";
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap");
-@import '~@swimlane/ngx-datatable/index.css';
-@import '~@swimlane/ngx-datatable/themes/material.scss';
-@import '~@swimlane/ngx-datatable/assets/icons.css';
-/* You can add global styles to this file, and also import other style files */ 
-html, body { height: 100%; }
-body { margin: 0; font-family: Lato, "Helvetica Neue", sans-serif; }
+@import "~@swimlane/ngx-datatable/index.css";
+@import "~@swimlane/ngx-datatable/themes/material.scss";
+@import "~@swimlane/ngx-datatable/assets/icons.css";
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Lato, "Helvetica Neue", sans-serif;
+}
+
+/* For dataTable status cell*/
+
+span[title="Pending"] {
+  padding: 10px 15px;
+  background: rgba(255, 230, 0, 0.22);
+  border-radius: 20.7887px;
+  color: #8f6201;
+}
+
+span[title="Completed"] {
+  padding: 10px 15px;
+  background: rgba(62, 244, 153, 0.15);
+  border-radius: 20.7887px;
+  color: #004924;
+}
+
+span[title="Canceled"] {
+  padding: 10px 15px;
+  background: rgba(236, 20, 20, 0.1);
+  border-radius: 20.7887px;
+  color: #860000;
+}
+
+/* For dataTable status cell*/
