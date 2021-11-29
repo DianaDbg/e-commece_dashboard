@@ -8,6 +8,7 @@
         <a href="javascript:void(0)" (click)="remove()">Remove</a>
       </small> -->
       <input
+        class="search"
         mat-input
         ype="text"
         placeholder="Type to filter the customer column..."
@@ -35,6 +36,7 @@
       [selectionType]="SelectionType.checkbox"
       (activate)="onActivate($event)"
       (select)="onSelect($event)"
+      [scrollbarH]="true"
     >
       <ngx-datatable-column
         [width]="30"
