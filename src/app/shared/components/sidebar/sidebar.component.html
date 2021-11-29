@@ -18,15 +18,29 @@
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>space_dashboard</mat-icon>Dashboard
       </a>
+      <!-- 
       <a mat-list-item routerLink="/products" routerLinkActive="active">
         <mat-icon>shopping_cart</mat-icon>Products
-      </a>
+      </a> -->
+
+      <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+        <mat-expansion-panel-header>
+          <a mat-list-item routerLink="/products" routerLinkActive="active">
+            <mat-icon>shopping_cart</mat-icon>Products
+          </a></mat-expansion-panel-header
+        >
+        <a mat-list-item routerLink="#">Products List</a>
+        <a mat-list-item routerLink="#">Category</a>
+      </mat-expansion-panel>
+
       <a mat-list-item routerLink="/orders" routerLinkActive="active">
         <mat-icon>article</mat-icon>Orders
       </a>
+
       <a mat-list-item routerLink="/customers" routerLinkActive="active">
         <mat-icon>people</mat-icon>Customers
       </a>
+
       <a mat-list-item routerLink="/analytics" routerLinkActive="active">
         <mat-icon>pie_chart</mat-icon>Analytics
       </a>

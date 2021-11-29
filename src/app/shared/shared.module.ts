@@ -14,6 +14,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgApexchartsModule } from 'ng-apexcharts';
 
@@ -36,6 +37,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatTableModule,
     NgxDatatableModule,
     NgApexchartsModule,
+    MatExpansionModule,
   ],
   exports: [
     RouterModule,
@@ -51,6 +53,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatTableModule,
     NgxDatatableModule,
     NgApexchartsModule,
+    MatExpansionModule,
   ],
 })
 export class SharedModule {}
