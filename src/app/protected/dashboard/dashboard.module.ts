@@ -3,19 +3,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
-
-
+import { AreaChartComponent } from './components/dashboard/area-chart/area-chart.component';
 
 @NgModule({
-  declarations: [DashboardComponent],
-  imports: [
-    SharedModule,
-    DashboardRoutingModule,
-  ],
-  exports: [
-    SharedModule,
-    DashboardComponent
-  ]
+  declarations: [DashboardComponent, AreaChartComponent],
+  imports: [SharedModule, DashboardRoutingModule],
+  exports: [SharedModule, DashboardComponent, AreaChartComponent],
 })
-export class DashboardModule { }
+export class DashboardModule {}
