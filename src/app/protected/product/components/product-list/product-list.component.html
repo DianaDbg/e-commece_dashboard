@@ -1,0 +1,43 @@
+<div class="add-product-button">
+  <button mat-raised-button color="accent">Add Product</button>
+</div>
+
+<mat-card>
+  <div class="table-header">
+    <h3>
+      Products
+      <!-- <small>
+        <a href="javascript:void(0)" (click)="add()">Add</a> |
+        <a href="javascript:void(0)" (click)="update()">Update</a> |
+        <a href="javascript:void(0)" (click)="remove()">Remove</a>
+      </small> -->
+      <input mat-input ype="text" placeholder="Type to filter the name column..." (keyup)="updateFilter($event)" />
+      <div>
+        <mat-icon>filter_list</mat-icon>
+        <mat-icon>more_vert</mat-icon>
+      </div>
+    </h3>
+  </div>
+
+  <div>
+    <ngx-datatable #table class="material" [rows]="rows" [columns]="columns" [columnMode]="ColumnMode.force"
+      [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10" [selected]="selected"
+      [selectionType]="SelectionType.checkbox" (activate)="onActivate($event)" (select)="onSelect($event)">
+      <ngx-datatable-column [width]="30" [sortable]="false" [canAutoResize]="false" [draggable]="false"
+        [resizeable]="false">
+        <ng-template ngx-datatable-header-template let-value="value" let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn">
+          <input type="checkbox" [checked]="allRowsSelected" (change)="selectFn(!allRowsSelected)" />
+        </ng-template>
+        <ng-template ngx-datatable-cell-template let-value="value" let-isSelected="isSelected"
+          let-onCheckboxChangeFn="onCheckboxChangeFn">
+          <input type="checkbox" [checked]="isSelected" (change)="onCheckboxChangeFn($event)" />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Name"></ngx-datatable-column>
+      <ngx-datatable-column name="Category"></ngx-datatable-column>
+      <ngx-datatable-column name="Quantity"></ngx-datatable-column>
+      <ngx-datatable-column name="Price"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</mat-card>

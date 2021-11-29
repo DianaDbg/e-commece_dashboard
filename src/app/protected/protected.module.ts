@@ -8,7 +8,6 @@ import { OrderModule } from './order/order.module';
 import { CustomerModule } from './customer/customer.module';
 import { AnalyticModule } from './analytic/analytic.module';
 
-
 @NgModule({
   declarations: [],
   imports: [
@@ -18,7 +17,16 @@ import { AnalyticModule } from './analytic/analytic.module';
     ProductModule,
     OrderModule,
     CustomerModule,
-    AnalyticModule
-  ]
+    AnalyticModule,
+  ],
+  exports: [
+    SharedModule,
+    ProtectedRoutingModule,
+    DashboardModule,
+    ProductModule,
+    OrderModule,
+    CustomerModule,
+    AnalyticModule,
+  ],
 })
-export class ProtectedModule { }
+export class ProtectedModule {}

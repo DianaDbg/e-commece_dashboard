@@ -1,0 +1,21 @@
+<div class="grid-container">
+  <mat-card class="dashboard-card" *ngFor="let card of cards">
+    <mat-card-content class="dashboard-card-content">
+      <div class="row-img">
+        <img src="{{ card.img }}" width="" alt="" />
+      </div>
+
+      <div class="row-text">
+        <div class="title">{{ card.title }}</div>
+        <div class="number">{{ card.number }}</div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+<div class="grid-container">
+  <mat-card class="chart-card">
+    <h3>Earnings</h3>
+    <app-area-chart></app-area-chart>
+  </mat-card>
+</div>
