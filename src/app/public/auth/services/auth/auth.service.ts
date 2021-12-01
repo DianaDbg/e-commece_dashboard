@@ -7,6 +7,6 @@ export class AuthService {
   constructor() {}
 
   hasToken() {
-    return false;
+    return true;
   }
 }
