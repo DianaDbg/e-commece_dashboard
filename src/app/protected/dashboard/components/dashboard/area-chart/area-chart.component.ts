@@ -30,6 +30,9 @@ export class AreaChartComponent {
 
   constructor() {
     this.chartOptions = {
+
+      colors: ['#E6A20E'],
+
       series: [
         {
           name: 'Earnings',
@@ -114,7 +117,7 @@ export class AreaChartComponent {
       },
 
       tooltip: {
-        enabled: false,
+        enabled: true,
         followCursor: true,
         intersect: false,
         inverseOrder: false,
@@ -157,6 +160,7 @@ export class AreaChartComponent {
           stops: [0, 90, 100],
         },
       },
+      
     };
   }
 
