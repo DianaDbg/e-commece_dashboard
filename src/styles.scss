@@ -44,3 +44,7 @@ span[title="Canceled"] {
 svg.apexcharts-svg {
   overflow: unset !important;
 }
+
+mat-form-field:focus {
+  border: 1px solid #e6a20e;
+}
