@@ -15,10 +15,13 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -39,9 +42,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatTableModule,
     NgxDatatableModule,
     NgApexchartsModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatSelectModule,
   ],
   exports: [
     RouterModule,
@@ -57,9 +63,12 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatTableModule,
     NgxDatatableModule,
     NgApexchartsModule,
+    MatExpansionModule,
     MatFormFieldModule,
     MatInputModule,
     ReactiveFormsModule,
+    HttpClientModule,
+    MatSelectModule,
   ],
 })
 export class SharedModule {}
