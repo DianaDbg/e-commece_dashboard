@@ -1,13 +1,7 @@
-<div class="add-product-button">
-  <button mat-raised-button color="accent" routerLink="add-product">
-    Add Product
-  </button>
-</div>
-
 <mat-card>
   <div class="table-header">
     <h3>
-      Products
+      Categoires
       <!-- <small>
         <a href="javascript:void(0)" (click)="add()">Add</a> |
         <a href="javascript:void(0)" (click)="update()">Update</a> |
@@ -17,7 +11,7 @@
         class="search"
         mat-input
         ype="text"
-        placeholder="Type to filter the name column..."
+        placeholder="Type to filter the customer column..."
         (keyup)="updateFilter($event)"
       />
       <div>
@@ -31,7 +25,7 @@
     <ngx-datatable
       #table
       class="material"
-      [rows]="rows"
+      [rows]="categories"
       [columns]="columns"
       [columnMode]="ColumnMode.force"
       [headerHeight]="50"
@@ -77,9 +71,10 @@
         </ng-template>
       </ngx-datatable-column>
       <ngx-datatable-column name="Name"></ngx-datatable-column>
-      <ngx-datatable-column name="Category"></ngx-datatable-column>
-      <ngx-datatable-column name="Quantity"></ngx-datatable-column>
-      <ngx-datatable-column name="Price"></ngx-datatable-column>
+      <ngx-datatable-column name="Description"></ngx-datatable-column>
+      <ngx-datatable-column name="Slug"></ngx-datatable-column>
+      <ngx-datatable-column name="Parent"></ngx-datatable-column>
+      <ngx-datatable-column name="Actions"></ngx-datatable-column>
     </ngx-datatable>
   </div>
 </mat-card>

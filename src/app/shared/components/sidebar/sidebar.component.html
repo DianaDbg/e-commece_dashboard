@@ -25,12 +25,14 @@
 
       <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
         <mat-expansion-panel-header>
-          <a mat-list-item routerLink="/products" routerLinkActive="active">
+          <a mat-list-item routerLinkActive="active" routerLink="/product-list">
             <mat-icon>shopping_cart</mat-icon>Products
           </a></mat-expansion-panel-header
         >
-        <a mat-list-item routerLink="#">Products List</a>
-        <a mat-list-item routerLink="#">Category</a>
+        <a class="sub-menu" mat-list-item routerLink="/product-list"
+          >Products List</a
+        >
+        <a class="sub-menu" mat-list-item routerLink="/category">Category</a>
       </mat-expansion-panel>
 
       <a mat-list-item routerLink="/orders" routerLinkActive="active">

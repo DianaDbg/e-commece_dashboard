@@ -1,1 +1,130 @@
-<p>add-product works!</p>
+<mat-card>
+  <h3>Product Informations</h3>
+  <form class="add-product-form" [formGroup]="productForm">
+    <div class="form-row-1">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Product name </mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error
+          *ngIf="
+            productForm?.controls?.name?.touched &&
+            productForm?.controls?.name?.invalid
+          "
+        >
+          <span *ngIf="productForm?.controls?.name?.errors?.required">
+            This field is mandatory.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Product category</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option
+            *ngFor="let category of categories"
+            value="{{ category?.id }}"
+            >{{ category?.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Product sub category</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option
+            *ngFor="let category of categories"
+            value="{{ category?.id }}"
+            >{{ category?.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row-2">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+        <mat-error
+          *ngIf="
+            productForm?.controls?.description?.touched &&
+            productForm?.controls?.description?.invalid
+          "
+        >
+          <span *ngIf="productForm?.controls?.description?.errors?.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-card>
+
+<mat-card>
+  <h3>Product Details</h3>
+  <form class="add-product-form" [formGroup]="productForm">
+    <div class="form-row-1">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Price </mat-label>
+        <input matInput formControlName="name" type="number" required />
+        <mat-error
+          *ngIf="
+            productForm?.controls?.name?.touched &&
+            productForm?.controls?.name?.invalid
+          "
+        >
+          <span *ngIf="productForm?.controls?.name?.errors?.required">
+            This field is mandatory.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Sizes</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option
+            *ngFor="let category of categories"
+            value="{{ category?.id }}"
+            >{{ category?.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+    </div>
+
+    <div class="form-row-2">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Stock </mat-label>
+        <input matInput formControlName="name" type="number" required />
+        <mat-error
+          *ngIf="
+            productForm?.controls?.name?.touched &&
+            productForm?.controls?.name?.invalid
+          "
+        >
+          <span *ngIf="productForm?.controls?.name?.errors?.required">
+            This field is mandatory.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Colors</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option></mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <br />
+      <button mat-raised-button type="submit" color="accent">
+        Add Product
+      </button>
+    </div>
+  </form>
+</mat-card>

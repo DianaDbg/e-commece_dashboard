@@ -8,7 +8,26 @@
 }
 
 .mat-expansion-panel {
+  mat-expansion-panel-header {
+    a:active,
+    a:focus {
+      color: #e6a20e;
+      border-left: 2px solid #e6a20e;
+      background-color: #9c9c9c12;
+    }
+  }
+
   background-color: #140e00 !important;
+
+  a.sub-menu {
+    border-left: 2px solid #929292;
+
+    &:focus,
+    &:hover {
+      border-left: 2px solid #e6a20e;
+      color: #e6a20e !important;
+    }
+  }
 }
 
 .sidenav {
