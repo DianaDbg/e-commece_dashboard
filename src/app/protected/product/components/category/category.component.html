@@ -1,0 +1,101 @@
+<mat-card>
+  <h3>Add category</h3>
+  <form
+    class="category-form"
+    [formGroup]="categoryForm"
+    (ngSubmit)="addCategory()"
+  >
+    <div class="form-row-1">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Name </mat-label>
+        <input matInput formControlName="name" required />
+        <mat-error
+          *ngIf="
+            categoryForm?.controls?.name?.touched &&
+            categoryForm?.controls?.name?.invalid
+          "
+        >
+          <span *ngIf="categoryForm?.controls?.name?.errors?.required">
+            This field is mandatory.
+          </span>
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> slug </mat-label>
+        <input matInput formControlName="slug" type="text" required />
+        <mat-error
+          *ngIf="
+            categoryForm?.controls?.slug?.touched &&
+            categoryForm?.controls?.slug?.invalid
+          "
+        >
+          <span *ngIf="categoryForm?.controls?.slug?.errors?.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" required></textarea>
+        <mat-error
+          *ngIf="
+            categoryForm?.controls?.description?.touched &&
+            categoryForm?.controls?.description?.invalid
+          "
+        >
+          <span *ngIf="categoryForm?.controls?.description?.errors?.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row-2">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label>Parent</mat-label>
+        <mat-select formControlName="parent">
+          <mat-option
+            *ngFor="let category of categories"
+            value="{{ category?.id }}"
+            >{{ category?.name }}</mat-option
+          >
+        </mat-select>
+        <mat-error
+          *ngIf="
+            categoryForm?.controls?.parent?.touched &&
+            categoryForm?.controls?.parent?.invalid
+          "
+        >
+          <span *ngIf="categoryForm?.controls?.parent?.errors?.required"
+            >This field is mandatory.</span
+          >
+        </mat-error>
+      </mat-form-field>
+
+      <br />
+
+      <!-- <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Image </mat-label>
+        <input matInput formControlName="image" type="text" required />
+        <div class="form-group">
+          <label for="file">Choose File</label>
+          <input type="file" id="file" />
+        </div>
+      </mat-form-field> -->
+
+      <br />
+
+      <button mat-raised-button type="submit" color="accent">
+        Add Category
+      </button>
+    </div>
+  </form>
+</mat-card>
+
+<app-category-list [categories]="categories"></app-category-list>
