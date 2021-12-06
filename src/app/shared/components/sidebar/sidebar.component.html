@@ -18,15 +18,31 @@
       <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
         <mat-icon>space_dashboard</mat-icon>Dashboard
       </a>
+      <!-- 
       <a mat-list-item routerLink="/products" routerLinkActive="active">
         <mat-icon>shopping_cart</mat-icon>Products
-      </a>
+      </a> -->
+
+      <mat-expansion-panel [class.mat-elevation-z0]="true" dense>
+        <mat-expansion-panel-header>
+          <a mat-list-item routerLinkActive="active" routerLink="/product-list">
+            <mat-icon>shopping_cart</mat-icon>Products
+          </a></mat-expansion-panel-header
+        >
+        <a class="sub-menu" mat-list-item routerLink="/product-list"
+          >Products List</a
+        >
+        <a class="sub-menu" mat-list-item routerLink="/category">Category</a>
+      </mat-expansion-panel>
+
       <a mat-list-item routerLink="/orders" routerLinkActive="active">
         <mat-icon>article</mat-icon>Orders
       </a>
+
       <a mat-list-item routerLink="/customers" routerLinkActive="active">
         <mat-icon>people</mat-icon>Customers
       </a>
+
       <a mat-list-item routerLink="/analytics" routerLinkActive="active">
         <mat-icon>pie_chart</mat-icon>Analytics
       </a>
@@ -65,22 +81,6 @@
         <button mat-menu-item>
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
-        </button>
-      </mat-menu>
-
-      <button
-        mat-icon-button
-        [matMenuTriggerFor]="notification"
-        aria-label="Example icon-button with a menu"
-      >
-        <mat-icon class="notification">notifications</mat-icon>
-      </button>
-      <mat-menu #notification="matMenu">
-        <button mat-menu-item>
-          <span>Samson shoes out of stock</span>
-        </button>
-        <button mat-menu-item>
-          <span>Samson hat out of stock</span>
         </button>
       </mat-menu>
     </mat-toolbar>

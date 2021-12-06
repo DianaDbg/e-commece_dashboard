@@ -1,7 +1,7 @@
 <mat-card>
   <div class="table-header">
     <h3>
-      Orders
+      Categoires
       <!-- <small>
         <a href="javascript:void(0)" (click)="add()">Add</a> |
         <a href="javascript:void(0)" (click)="update()">Update</a> |
@@ -25,7 +25,7 @@
     <ngx-datatable
       #table
       class="material"
-      [rows]="rows"
+      [rows]="categories"
       [columns]="columns"
       [columnMode]="ColumnMode.force"
       [headerHeight]="50"
@@ -70,11 +70,11 @@
           />
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="ID"></ngx-datatable-column>
-      <ngx-datatable-column name="Date"></ngx-datatable-column>
-      <ngx-datatable-column name="Customers"></ngx-datatable-column>
-      <ngx-datatable-column name="Items"></ngx-datatable-column>
-      <ngx-datatable-column name="Status"></ngx-datatable-column>
+      <ngx-datatable-column name="Name"></ngx-datatable-column>
+      <ngx-datatable-column name="Description"></ngx-datatable-column>
+      <ngx-datatable-column name="Slug"></ngx-datatable-column>
+      <ngx-datatable-column name="Parent"></ngx-datatable-column>
+      <ngx-datatable-column name="Actions"></ngx-datatable-column>
     </ngx-datatable>
   </div>
 </mat-card>

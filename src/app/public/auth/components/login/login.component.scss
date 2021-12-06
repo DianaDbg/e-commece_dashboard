@@ -1,0 +1,37 @@
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
+  margin-bottom: 20px;
+
+  form {
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
+    padding: 150px 80px;
+    border-radius: 12px;
+    mat-form-field,
+    button {
+      width: 100%;
+      border-radius: 12px;
+      margin: 8px;
+    }
+
+    width: 500px;
+    .logo {
+      display: flex;
+      justify-content: center;
+      transform: translateY(-80px);
+    }
+  }
+
+  button {
+    font-family: Lato;
+    background-color: #140d00;
+    color: #e7b542;
+    padding: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+}
