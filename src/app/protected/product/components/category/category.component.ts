@@ -1,8 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import {
+  Validators,
+  FormGroup,
+  FormBuilder,
+  FormControl,
+} from '@angular/forms';
 import { FileService } from 'src/app/core/services/File/file.service';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category/category.service';
+import {
+  DialogLayoutDisplay,
+  ToastNotificationInitializer,
+  AppearanceAnimation,
+  DisappearanceAnimation,
+} from '@costlydeveloper/ngx-awesome-popup';
+import { FileUploadValidators } from '@iplab/ngx-file-upload';
 
 @Component({
   selector: 'app-category',
@@ -12,7 +24,15 @@ import { CategoryService } from '../../services/category/category.service';
 export class CategoryComponent implements OnInit {
   categoryForm!: FormGroup;
   fileToUpload: File | null = null;
+  fileUploadedId!: string;
   categories!: Category[];
+  public animation: boolean = false;
+  public multiple: boolean = false;
+
+  private filesControl = new FormControl(
+    null,
+    FileUploadValidators.filesLimit(2)
+  );
 
   constructor(
     private formBuilder: FormBuilder,
@@ -26,50 +46,87 @@ export class CategoryComponent implements OnInit {
       slug: [null, Validators.required],
       description: [null, Validators.required],
       parent: [null],
-      image: [null, Validators.required],
+      image: this.filesControl,
     });
 
     this.getCategory();
   }
 
-  handleFileInput(files: FileList) {
-    this.fileToUpload = files.item(0);
-  }
-
   uploadFileToActivity() {
-    this.fileService.saveFile(this.fileToUpload!).subscribe(
-      (data) => {
-        // do something, if upload success
-      },
-      (error) => {
-        console.log(error);
-      }
+    console.log('File controle : ', this.filesControl.value[0]);
+    let promise = Promise.resolve(
+      this.fileService.saveFile(this.filesControl.value[0]).subscribe(
+        (response: any) => {
+          this.fileUploadedId = response?.data?.id;
+          console.log('File uploaded sucessfully !', this.fileUploadedId);
+        },
+        (error) => {
+          console.error('Upload file error !', error);
+        }
+      )
     );
+    return promise;
   }
 
   addCategory() {
-    const newCategory: Category = {
-      name: this.categoryForm.get('name')?.value,
-      slug: this.categoryForm.get('slug')?.value,
-      description: this.categoryForm.get('description')?.value,
-      parent: this.categoryForm.get('parent')?.value,
-      image: this.categoryForm.get('image')?.value,
-      is_active: true,
-    };
+    this.uploadFileToActivity().then(() => {
+      const newCategory: Category = {
+        name: this.categoryForm.get('name')?.value,
+        slug: this.categoryForm.get('slug')?.value,
+        description: this.categoryForm.get('description')?.value,
+        parent: this.categoryForm.get('parent')?.value,
+        image: this.fileUploadedId,
+        is_active: true,
+      };
 
-    this.categoryService.saveCategory(newCategory).subscribe(
-      (response) => console.log('addCategory sucessfully !'),
-      (error) => console.error(error)
-    );
+      this.categoryService.saveCategory(newCategory).subscribe(
+        (response) => {
+          console.log('addCategory sucessfully !');
+          this.categories.push(newCategory);
+          this.toastNotification(
+            'Notification',
+            'Category added sucessfully !',
+            DialogLayoutDisplay.SUCCESS
+          );
+        },
+
+        (error) => {
+          this.toastNotification(
+            'Notification',
+            'Category not added !',
+            DialogLayoutDisplay.DANGER
+          );
+          console.error(error);
+        }
+      );
+    });
   }
 
   getCategory() {
     this.categoryService.getCategories().subscribe(
       (response) => {
         console.log('getCategory sucessfully !');
-        this.categories = response?.data;
+        this.categories = response?.results;
       },
       (error) => console.log(error)
     );
+  }
+
+  toastNotification(
+    title: string,
+    message: string,
+    status: DialogLayoutDisplay
+  ) {
+    const newToastNotification = new ToastNotificationInitializer();
+    newToastNotification.setTitle(title);
+    newToastNotification.setMessage(message);
+
+    newToastNotification.setConfig({
+      LayoutType: status, // SUCCESS | INFO | NONE | DANGER | WARNING
+      AnimationIn: AppearanceAnimation.ELASTIC,
+      AnimationOut: DisappearanceAnimation.FLIP_OUT,
+    });
+
+    newToastNotification.openToastNotification$();
   }
 }

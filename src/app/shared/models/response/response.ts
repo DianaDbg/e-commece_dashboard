@@ -4,6 +4,6 @@
  * @field message - backend response message
  */
 export interface Response<T> {
-  data: T;
+  results: T;
   message?: string;
 }

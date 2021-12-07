@@ -80,14 +80,11 @@
 
       <br />
 
-      <!-- <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label> Image </mat-label>
-        <input matInput formControlName="image" type="text" required />
-        <div class="form-group">
-          <label for="file">Choose File</label>
-          <input type="file" id="file" />
-        </div>
-      </mat-form-field> -->
+      <file-upload
+        formControlName="image"
+        [multiple]="multiple"
+        [animation]="animation"
+      ></file-upload>
 
       <br />
 
