@@ -72,3 +72,7 @@ span.mat-expansion-indicator {
 .mat-form-field-appearance-outline .mat-form-field-outline-thick {
   color: #e6a20e !important;
 }
+
+input[name="price"] {
+  transform: translateY(2.5px);
+}

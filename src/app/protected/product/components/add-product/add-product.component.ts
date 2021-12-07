@@ -33,7 +33,7 @@ export class AddProductComponent implements OnInit {
     this.categoryService.getCategories().subscribe(
       (response) => {
         console.log('getCategory sucessfully !');
-        this.categories = response?.data;
+        this.categories = response?.results;
       },
       (error) => console.log(error)
     );

@@ -22,6 +22,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -48,6 +49,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     MatSelectModule,
+    FileUploadModule,
   ],
   exports: [
     RouterModule,
@@ -69,6 +71,7 @@ import { HttpClientModule } from '@angular/common/http';
     ReactiveFormsModule,
     HttpClientModule,
     MatSelectModule,
+    FileUploadModule,
   ],
 })
 export class SharedModule {}
