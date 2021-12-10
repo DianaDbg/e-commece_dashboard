@@ -1,130 +1,308 @@
-<mat-card>
-  <h3>Product Informations</h3>
-  <form class="add-product-form" [formGroup]="productForm">
-    <div class="form-row-1">
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label> Product name </mat-label>
-        <input matInput formControlName="name" required />
-        <mat-error
-          *ngIf="
-            productForm?.controls?.name?.touched &&
-            productForm?.controls?.name?.invalid
-          "
-        >
-          <span *ngIf="productForm?.controls?.name?.errors?.required">
-            This field is mandatory.
-          </span>
-        </mat-error>
-      </mat-form-field>
+<form [formGroup]="productForm" (ngSubmit)="addProduct()">
+  <div class="add-product-form">
+    <div class="add-product-form">
+      <mat-stepper #stepper linear>
+        <mat-step>
+          <ng-template matStepLabel>Product Informations</ng-template>
+          <ng-container class="card-one">
+            <div class="form-row-1">
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Product name </mat-label>
+                <input matInput formControlName="name" required />
+                <mat-error
+                  *ngIf="
+                    productForm?.controls?.name?.touched &&
+                    productForm?.controls?.name?.invalid
+                  "
+                >
+                  <span *ngIf="productForm?.controls?.name?.errors?.required">
+                    This field is mandatory.
+                  </span>
+                </mat-error>
+              </mat-form-field>
 
-      <br />
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label>Product category</mat-label>
-        <mat-select formControlName="parent">
-          <mat-option
-            *ngFor="let category of categories"
-            value="{{ category?.id }}"
-            >{{ category?.name }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+              <br />
 
-      <br />
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Slug </mat-label>
+                <input matInput formControlName="slug" required />
+              </mat-form-field>
 
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label>Product sub category</mat-label>
-        <mat-select formControlName="parent">
-          <mat-option
-            *ngFor="let category of categories"
-            value="{{ category?.id }}"
-            >{{ category?.name }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
+              <br />
+
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label>Product category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option
+                    *ngFor="let category of categories"
+                    value="{{ category?.id }}"
+                    >{{ category?.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row-2">
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Price </mat-label>
+                <input
+                  matInput
+                  formControlName="price"
+                  type="number"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    productForm?.controls?.price?.touched &&
+                    productForm?.controls?.price?.invalid
+                  "
+                >
+                  <span *ngIf="productForm?.controls?.price?.errors?.required">
+                    This field is mandatory.
+                  </span>
+                </mat-error>
+              </mat-form-field>
+              <br />
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Stock </mat-label>
+                <input
+                  matInput
+                  formControlName="stock"
+                  type="number"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    productForm?.controls?.stock?.touched &&
+                    productForm?.controls?.stock?.invalid
+                  "
+                >
+                  <span *ngIf="productForm?.controls?.stock?.errors?.required">
+                    This field is mandatory.
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <br />
+
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label>Description</mat-label>
+                <textarea
+                  matInput
+                  formControlName="description"
+                  required
+                ></textarea>
+                <mat-error
+                  *ngIf="
+                    productForm?.controls?.description?.touched &&
+                    productForm?.controls?.description?.invalid
+                  "
+                >
+                  <span
+                    *ngIf="productForm?.controls?.description?.errors?.required"
+                    >This field is mandatory.</span
+                  >
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="btn-add-product" mat-button matStepperNext>
+              <button
+                mat-raised-button
+                style="min-width: 400px !important"
+                type="button"
+                color="accent"
+                mat-button
+                matStepperNext
+              >
+                Next
+              </button>
+            </div>
+          </ng-container>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Product Details</ng-template>
+          <ng-container class="card-two">
+            <div class="product-details">
+              <button
+                mat-raised-button
+                type="button"
+                (click)="addColor()"
+                color="accent"
+              >
+                <mat-icon>add_circle</mat-icon> Add Couleur
+              </button>
+            </div>
+
+            <br />
+
+            <ng-container formArrayName="colors">
+              <ng-container
+                *ngFor="let color of colors().controls; let colorIndex = index"
+              >
+                <ng-container [formGroupName]="colorIndex">
+                  <div class="div-variants">
+                    <mat-accordion>
+                      <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Color </mat-panel-title>
+                          <mat-panel-description>
+                            <span>{{ colorIndex }}</span>
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-form-field
+                          class="form-field"
+                          appearance="outline"
+                          color="accent"
+                        >
+                          <mat-label> Colors </mat-label>
+                          <input
+                            matInput
+                            formControlName="code"
+                            type="color"
+                            required
+                          />
+                          <!-- <mat-error
+                    *ngIf="
+                      colors?.controls?.code?.touched &&
+                      colors?.controls?.code?.invalid
+                    "
+                  >
+                    <span *ngIf="colors?.controls?.code?.errors?.required">
+                      This field is mandatory.
+                    </span>
+                  </mat-error> -->
+                        </mat-form-field>
+
+                        <br />
+
+                        <ng-container formArrayName="sizes">
+                          <ng-container
+                            *ngFor="
+                              let size of colorsSizes(colorIndex)?.controls;
+                              let sizeIndex = index
+                            "
+                          >
+                            <ng-container [formGroupName]="sizeIndex">
+                              <div class="size-section">
+                                <mat-form-field
+                                  class="form-field"
+                                  appearance="outline"
+                                  color="accent"
+                                >
+                                  <mat-label>Sizes {{ sizeIndex }}</mat-label>
+
+                                  <mat-select formControlName="size">
+                                    <mat-option
+                                      *ngFor="let size_ of Sizes | keyvalue"
+                                      value="{{ size_?.value }}"
+                                      >{{ size_?.key }}</mat-option
+                                    >
+                                  </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field
+                                  class="form-field"
+                                  appearance="outline"
+                                  color="accent"
+                                >
+                                  <mat-label> Quantity </mat-label>
+
+                                  <input
+                                    matInput
+                                    formControlName="quantity"
+                                    type="number"
+                                    required
+                                  />
+                                  <!-- <mat-error
+                                  *ngIf="
+                                    productForm?.controls?.quantity?.touched &&
+                                    productForm?.controls?.quantity?.invalid
+                                  "
+                                >
+                                  <span
+                                    *ngIf="
+                                      productForm?.controls?.quantity?.errors
+                                        ?.required
+                                    "
+                                  >
+                                    This field is mandatory.
+                                  </span>
+                                </mat-error> -->
+                                </mat-form-field>
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                        </ng-container>
+
+                        <button
+                          mat-raised-button
+                          type="button"
+                          (click)="addSize(colorIndex)"
+                          color="accent"
+                        >
+                          <mat-icon>add_circle</mat-icon> Add Size
+                        </button>
+
+                        <file-upload
+                          formControlName="images"
+                          [multiple]="multiple"
+                          [animation]="animation"
+                        ></file-upload>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <div class="btn-publish-product">
+            <button
+              class="btn-back"
+              matStepperPrevious
+              type="button"
+              color="accent"
+            >
+              Back
+            </button>
+            <button
+              class="btn-next"
+              matStepperNext
+              type="submit"
+              color="accent"
+            >
+              Publish Product
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
     </div>
-
-    <div class="form-row-2">
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label>Description</mat-label>
-        <textarea matInput formControlName="description" required></textarea>
-        <mat-error
-          *ngIf="
-            productForm?.controls?.description?.touched &&
-            productForm?.controls?.description?.invalid
-          "
-        >
-          <span *ngIf="productForm?.controls?.description?.errors?.required"
-            >This field is mandatory.</span
-          >
-        </mat-error>
-      </mat-form-field>
-    </div>
-  </form>
-</mat-card>
-
-<mat-card>
-  <h3>Product Details</h3>
-  <form class="add-product-form" [formGroup]="productForm">
-    <div class="form-row-1">
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label> Price </mat-label>
-        <input matInput formControlName="name" type="number" required />
-        <mat-error
-          *ngIf="
-            productForm?.controls?.name?.touched &&
-            productForm?.controls?.name?.invalid
-          "
-        >
-          <span *ngIf="productForm?.controls?.name?.errors?.required">
-            This field is mandatory.
-          </span>
-        </mat-error>
-      </mat-form-field>
-
-      <br />
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label>Sizes</mat-label>
-        <mat-select formControlName="parent">
-          <mat-option
-            *ngFor="let category of categories"
-            value="{{ category?.id }}"
-            >{{ category?.name }}</mat-option
-          >
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-    </div>
-
-    <div class="form-row-2">
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label> Stock </mat-label>
-        <input matInput formControlName="name" type="number" required />
-        <mat-error
-          *ngIf="
-            productForm?.controls?.name?.touched &&
-            productForm?.controls?.name?.invalid
-          "
-        >
-          <span *ngIf="productForm?.controls?.name?.errors?.required">
-            This field is mandatory.
-          </span>
-        </mat-error>
-      </mat-form-field>
-
-      <br />
-
-      <mat-form-field class="form-field" appearance="outline" color="accent">
-        <mat-label>Colors</mat-label>
-        <mat-select formControlName="parent">
-          <mat-option></mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <br />
-      <button mat-raised-button type="submit" color="accent">
-        Add Product
-      </button>
-    </div>
-  </form>
-</mat-card>
+  </div>
+</form>

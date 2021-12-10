@@ -70,7 +70,7 @@ export class CategoryComponent implements OnInit {
 
   addCategory() {
     this.uploadFileToActivity().then(() => {
-      const newCategory: Category = {
+      const categoryPayload: Category = {
         name: this.categoryForm.get('name')?.value,
         slug: this.categoryForm.get('slug')?.value,
         description: this.categoryForm.get('description')?.value,
@@ -79,10 +79,9 @@ export class CategoryComponent implements OnInit {
         is_active: true,
       };
 
-      this.categoryService.saveCategory(newCategory).subscribe(
+      this.categoryService.saveCategory(categoryPayload).subscribe(
         (response) => {
-          console.log('addCategory sucessfully !');
-          this.categories.push(newCategory);
+          this.categories.push(categoryPayload);
           this.toastNotification(
             'Notification',
             'Category added sucessfully !',
@@ -105,7 +104,6 @@ export class CategoryComponent implements OnInit {
   getCategory() {
     this.categoryService.getCategories().subscribe(
       (response) => {
-        console.log('getCategory sucessfully !');
         this.categories = response?.results;
       },
       (error) => console.log(error)

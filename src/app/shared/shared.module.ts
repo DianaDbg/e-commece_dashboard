@@ -23,6 +23,7 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -50,6 +51,7 @@ import { FileUploadModule } from '@iplab/ngx-file-upload';
     HttpClientModule,
     MatSelectModule,
     FileUploadModule,
+    MatStepperModule,
   ],
   exports: [
     RouterModule,
@@ -72,6 +74,7 @@ import { FileUploadModule } from '@iplab/ngx-file-upload';
     HttpClientModule,
     MatSelectModule,
     FileUploadModule,
+    MatStepperModule,
   ],
 })
 export class SharedModule {}
