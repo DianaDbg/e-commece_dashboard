@@ -1,5 +1,5 @@
-import { Category } from "./category";
-import { Color } from "./color";
+import { Category } from './category';
+import { Color } from './color';
 
 export interface Product {
   id?: string;

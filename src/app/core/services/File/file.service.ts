@@ -15,15 +15,13 @@ export class FileService {
   ) {}
 
   saveFile(file: File) {
-    return this.httpClient.post<FileModel>(
-      this.baseUrl,
-      new FormData().append('file', file),
-      {
-        headers: new HttpHeaders({
-          Authorization: 'token ' + this.authService.getToken(),
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+
+    return this.httpClient.post<FileModel>(this.baseUrl, formData, {
+      headers: new HttpHeaders({
+        Authorization: 'token ' + this.authService.getToken(),
+      }),
+    });
   }
 }
