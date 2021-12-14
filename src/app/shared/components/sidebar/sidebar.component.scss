@@ -68,8 +68,8 @@
   position: sticky;
   top: 0;
   z-index: 1;
-  background: white;
-  color: #252733;
+  background: #c28f2a;
+  color: #ffffff;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
   font-size: 24px;
   font-family: "Lato";
@@ -83,7 +83,7 @@
     font-size: 1rem;
     font-weight: 600;
     margin-right: 5px;
-    color: #252733;
+    color: #ffffff;
     margin-bottom: 0;
   }
 
@@ -91,4 +91,25 @@
     color: #929292;
     padding: 0 16px;
   }
+}
+
+.mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"])
+  .mat-expansion-panel-header:hover {
+  background: #140e00 !important;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0 !important;
+  transition: height 225ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+span.mat-expansion-indicator {
+  display: none !important;
+}
+
+.mat-expansion-panel {
+  border-radius: 0 !important;
 }

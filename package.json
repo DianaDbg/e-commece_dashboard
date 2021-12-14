@@ -20,6 +20,8 @@
     "@angular/platform-browser": "~12.2.0",
     "@angular/platform-browser-dynamic": "~12.2.0",
     "@angular/router": "~12.2.0",
+    "@costlydeveloper/ngx-awesome-popup": "^2.2.0",
+    "@iplab/ngx-file-upload": "^3.3.3",
     "@swimlane/ngx-datatable": "^20.0.0",
     "apexcharts": "^3.30.0",
     "ng-apexcharts": "^1.5.12",
