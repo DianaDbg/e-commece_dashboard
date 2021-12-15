@@ -19,6 +19,7 @@ import {
   DisappearanceAnimation,
   ToastNotificationInitializer,
 } from '@costlydeveloper/ngx-awesome-popup';
+import { File } from '../../models/file';
 
 @Component({
   selector: 'app-add-product',
@@ -152,22 +153,28 @@ export class AddProductComponent implements OnInit {
     this.colorsSizes(colorIndex).removeAt(sizeIndex);
   }
 
-  addProduct() {
-    const productPayload: Product = {
-      name: this.productForm.get('name')?.value,
-      slug: this.productForm.get('slug')?.value,
-      category: this.productForm.get('category')?.value,
-      price: this.productForm.get('price')?.value,
-      quantity: this.productForm.get('stock')?.value,
-      description: this.productForm.get('description')?.value,
-      is_active: true,
-      colors: [],
+  uploadProductImages() {
+    const productsImagesPayload: File = {
+      file: '',
     };
+  }
 
-    this.productService.saveProduct(productPayload).subscribe(
+  addProduct() {
+    // const productPayload: Product = {
+    //   name: this.productForm.get('name')?.value,
+    //   slug: this.productForm.get('slug')?.value,
+    //   category: this.productForm.get('category')?.value,
+    //   price: this.productForm.get('price')?.value,
+    //   quantity: this.productForm.get('stock')?.value,
+    //   description: this.productForm.get('description')?.value,
+    //   is_active: true,
+    //   colors: [],
+    // };
+
+    this.productService.createProduct(this.productForm.value).subscribe(
       (response: any) => {
         console.log('Product saved !', response);
-        this.productId = response.data.colors;
+        // this.productId = response.data.colors;
         console.log(this.productId);
         this.toastNotification(
           'Notification',
@@ -175,8 +182,9 @@ export class AddProductComponent implements OnInit {
           DialogLayoutDisplay.SUCCESS
         );
       },
-      (error) => {
+      (error: any) => {
         console.error('Product not saved !', error);
+        console.log(this.productForm.value);
         this.toastNotification(
           'Notification',
           'Product not added !',
