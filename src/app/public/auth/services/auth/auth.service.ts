@@ -42,7 +42,7 @@ export class AuthService {
       const data: any = localStorage.getItem('admin')
       const adminData: any = JSON.parse(data);
       const token = adminData.data.token;
-      // return id;
+      // return token;
     }
     return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTIyNzg4Mn0.A3dSL2GeiTImbVlZ9Z40nuABpnLzsud-JSUuJT3fLvg';
   }
