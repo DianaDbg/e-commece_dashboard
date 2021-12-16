@@ -24,6 +24,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatChipsModule } from '@angular/material/chips';
 
 @NgModule({
   declarations: [SidebarComponent],
@@ -52,6 +53,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSelectModule,
     FileUploadModule,
     MatStepperModule,
+    MatChipsModule,
   ],
   exports: [
     RouterModule,
@@ -75,6 +77,7 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatSelectModule,
     FileUploadModule,
     MatStepperModule,
+    MatChipsModule,
   ],
 })
 export class SharedModule {}
