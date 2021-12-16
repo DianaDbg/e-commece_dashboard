@@ -56,10 +56,10 @@ export class CategoryService {
     );
   }
 
-  deleteCategory(category: Category, token: string) {
-    return this.httpClient.delete(this.baseUrl + '/' + category.id, {
+  deleteCategory(id: string) {
+    return this.httpClient.delete(this.baseUrl + '/' + id, {
       headers: new HttpHeaders({
-        Authorization: 'token ' + token,
+        Authorization: 'token ' + this.authService.getToken(),
         'Content-Type': 'application/json',
       }),
     });
