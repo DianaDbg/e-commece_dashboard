@@ -96,7 +96,11 @@
           </button>
 
           <mat-menu #menu="matMenu">
-            <button style="color: rgba(61, 113, 255, 0.685)" mat-menu-item>
+            <button
+              (click)="goToProductDetails()"
+              style="color: rgba(61, 113, 255, 0.685)"
+              mat-menu-item
+            >
               <mat-icon style="color: rgba(61, 113, 255, 0.685)"
                 >visibility</mat-icon
               >

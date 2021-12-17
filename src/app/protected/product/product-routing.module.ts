@@ -4,6 +4,7 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { CategoryComponent } from './components/category/category.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
 
 const routes: Routes = [
   {
@@ -11,8 +12,8 @@ const routes: Routes = [
     component: ProductListComponent,
   },
   {
-    path: 'product/:id',
-    component: ProductDetailsComponent,
+    path: 'product-list/:id',
+    component: UpdateProductComponent,
   },
   {
     path: 'category',
