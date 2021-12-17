@@ -104,6 +104,10 @@ export class ProductListComponent implements OnInit {
     );
   }
 
+  goToProductDetails() {
+    this.router.navigate(['/product-list/' + this.productId]);
+  }
+
   confirmBox() {
     const confirmBox = new ConfirmBoxInitializer();
     confirmBox.setTitle('Are you sure?');

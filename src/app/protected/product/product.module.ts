@@ -8,10 +8,11 @@ import { AddProductComponent } from './components/add-product/add-product.compon
 import { CategoryComponent } from './components/category/category.component';
 import { CategoryListComponent } from './components/category/category-list/category-list.component';
 import { ProductDetailsComponent } from './components/product-details/product-details.component';
+import { UpdateProductComponent } from './components/update-product/update-product.component';
 
 
 @NgModule({
-  declarations: [ProductComponent, ProductListComponent, AddProductComponent, CategoryComponent, CategoryListComponent, ProductDetailsComponent],
+  declarations: [ProductComponent, ProductListComponent, AddProductComponent, CategoryComponent, CategoryListComponent, ProductDetailsComponent, UpdateProductComponent],
   imports: [SharedModule, ProductRoutingModule],
   exports: [ProductComponent, ProductListComponent],
 })

@@ -20,14 +20,20 @@ import {
   ToastNotificationInitializer,
 } from '@costlydeveloper/ngx-awesome-popup';
 import { File } from '../../models/file';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-add-product',
-  templateUrl: './add-product.component.html',
-  styleUrls: ['./add-product.component.scss'],
+  selector: 'app-update-product',
+  templateUrl: './update-product.component.html',
+  styleUrls: ['./update-product.component.scss'],
 })
-export class AddProductComponent implements OnInit {
+export class UpdateProductComponent implements OnInit {
+  id!: string;
+  // productData!: Product;
+
+  productData: Partial<Product> = {
+    name: '',
+  };
   data = {
     name: [''],
     slug: [''],
@@ -49,11 +55,12 @@ export class AddProductComponent implements OnInit {
       },
     ],
   };
-  productForm!: FormGroup;
-  productId!: number;
+
+  updateProductForm!: FormGroup;
+  // productId!: number;
   categories!: Category[];
   Sizes = Sizes;
-  panelOpenState = false;
+  panelOpenState = true;
   fileToUpload: File | null = null;
   public animation: boolean = false;
   public multiple: boolean = true;
@@ -66,30 +73,59 @@ export class AddProductComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private categoryService: CategoryService,
-    private fileService: FileService,
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private activeRoute: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {
-    this.productForm = this.formBuilder.group({
-      name: [null, [Validators.required]],
-      slug: [null],
-      category: [null, Validators.required],
-      price: [null, Validators.required],
-      stock: [null, Validators.required],
-      description: [null, Validators.required],
-      colors: this.formBuilder.array([]),
-    });
+  ngOnInit() {
+    this.productService
+      .getProductById(this.activeRoute.snapshot.params['id'])
+      .subscribe(
+        (response: any) => {
+          this.productData = response.data;
+          console.log('Product by id', this.productData.name);
+          this.updateProductForm = this.formBuilder.group({
+            name: [this.productData.name, Validators.required],
+            slug: [this.productData.slug, Validators.required],
+            category: [this.productData.category, Validators.required],
+            price: [this.productData.price, Validators.required],
+            stock: [this.productData.quantity, Validators.required],
+            description: [this.productData.description, Validators.required],
+            colors: [this.productData.colors, Validators.required],
+          });
+        },
+        (error) => {
+          console.error(error);
+        }
+      );
 
-    console.log(this.productForm.controls.colors);
+    console.log('Test :', this.productData.name);
 
     this.getCategory();
+
     this.setColors();
   }
 
+  // loadProductData() {
+  //   this.updateProductForm.controls['name']?.setValue(this.productData.name);
+  //   this.updateProductForm.controls['slug']?.patchValue(this.productData.slug);
+  //   this.updateProductForm.controls['category']?.patchValue(
+  //     this.productData.category
+  //   );
+  //   this.updateProductForm.controls['price']?.patchValue(
+  //     this.productData.price
+  //   );
+  //   this.updateProductForm.controls['stock']?.patchValue(
+  //     this.productData.quantity
+  //   );
+  //   this.updateProductForm.controls['description']?.patchValue(
+  //     this.productData.description
+  //   );
+  // }
+
   colors(): FormArray {
-    return this.productForm.get('colors') as FormArray;
+    return this.updateProductForm.get('colors') as FormArray;
   }
 
   addColor() {
@@ -108,7 +144,7 @@ export class AddProductComponent implements OnInit {
   }
 
   async setColors() {
-    let control = <FormArray>this.productForm?.controls?.colors;
+    let control = <FormArray>this.updateProductForm?.controls?.colors;
     await this.data?.colors?.forEach((x: any) => {
       control.push(
         this.formBuilder.group({
@@ -161,23 +197,23 @@ export class AddProductComponent implements OnInit {
     };
   }
 
-  addProduct() {
+  updateProduct() {
     // const productPayload: Product = {
-    //   name: this.productForm.get('name')?.value,
-    //   slug: this.productForm.get('slug')?.value,
-    //   category: this.productForm.get('category')?.value,
-    //   price: this.productForm.get('price')?.value,
-    //   quantity: this.productForm.get('stock')?.value,
-    //   description: this.productForm.get('description')?.value,
+    //   name: this.updateProductForm.get('name')?.value,
+    //   slug: this.updateProductForm.get('slug')?.value,
+    //   category: this.updateProductForm.get('category')?.value,
+    //   price: this.updateProductForm.get('price')?.value,
+    //   quantity: this.updateProductForm.get('stock')?.value,
+    //   description: this.updateProductForm.get('description')?.value,
     //   is_active: true,
     //   colors: [],
     // };
 
-    this.productService.createProduct(this.productForm.value).subscribe(
+    this.productService.updateProduct(this.updateProductForm.value).subscribe(
       (response: any) => {
-        console.log('Product saved !', response);
+        console.log('Product updated !', response);
         // this.productId = response.data.colors;
-        console.log(this.productId);
+        // console.log(this.productId);
         this.toastNotification(
           'Notification',
           'Product added sucessfully !',
@@ -186,8 +222,8 @@ export class AddProductComponent implements OnInit {
         this.router.navigate(['/product-lit']);
       },
       (error: any) => {
-        console.error('Product not saved !', error);
-        console.log(this.productForm.value);
+        console.error('Product not updated !', error);
+        console.log(this.updateProductForm.value);
         this.toastNotification(
           'Notification',
           'Product not added !',
