@@ -1,20 +1,56 @@
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { LoginAdmin } from '../../models/loginAdmin';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor() {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
+
+  login(data: LoginAdmin) {
+    return this.httpClient.post<LoginAdmin>(
+      `${environment.baseUrl}users/auths/admins/login`,
+      data
+    );
+  }
 
   hasToken() {
-    return true;
+    if (this.getToken()) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   getId() {
+    if (localStorage.getItem('admin')) {
+      const data: any = localStorage.getItem('admin');
+      const adminData: any = JSON.parse(data);
+      const id = adminData.data.id;
+      // return id;
+    }
     return 'fa6088e9-fb50-45c4-b57d-51485d2e5686';
   }
 
+  saveAdmin(data: any) {
+    localStorage.setItem('admin', JSON.stringify(data));
+  }
+
   getToken() {
-    return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTY1OTk0NX0.DGi-mU6daC3qjyBO9b_FMH3DM0Y1MHwglaysD48-A8E';
+    if (localStorage.getItem('admin')) {
+      const data: any = localStorage.getItem('admin');
+      const adminData: any = JSON.parse(data);
+      const token = adminData.data.token;
+      // return token;
+    }
+    return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTIyNzg4Mn0.A3dSL2GeiTImbVlZ9Z40nuABpnLzsud-JSUuJT3fLvg';
+  }
+
+  logout() {
+    localStorage.removeItem('admin');
+    this.router.navigate(['/login']);
   }
 }
