@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {LoginAdmin} from '../../models/loginAdmin'
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   login(data: LoginAdmin){
     return this.httpClient.post<LoginAdmin>(`${environment.baseUrl}users/auths/admins/login`, data)
@@ -41,9 +42,14 @@ export class AuthService {
       const data: any = localStorage.getItem('admin')
       const adminData: any = JSON.parse(data);
       const token = adminData.data.token;
-      // return id;
+      // return token;
     }
     return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTIyNzg4Mn0.A3dSL2GeiTImbVlZ9Z40nuABpnLzsud-JSUuJT3fLvg';
+  }
+
+  logout(){
+    localStorage.removeItem('admin');
+    this.router.navigate(['/login'])
   }
 
 }
