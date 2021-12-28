@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { AuthService } from 'src/app/public/auth/services/auth/auth.service';
 
 @Component({
@@ -6,7 +7,10 @@ import { AuthService } from 'src/app/public/auth/services/auth/auth.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  loggedIn: boolean = this.authService.hasToken();
+export class AppComponent implements OnInit {
+  loggedIn = this.authService.hasToken();
   constructor(private authService: AuthService) {}
+  ngOnInit() {
+    // console.log(this.loggedIn);
+  }
 }

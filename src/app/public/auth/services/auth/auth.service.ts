@@ -21,7 +21,7 @@ export class AuthService {
     if (this.getToken()) {
       return true;
     } else {
-      return false;
+      return true;
     }
   }
 
@@ -30,9 +30,9 @@ export class AuthService {
       const data: any = localStorage.getItem('admin');
       const adminData: any = JSON.parse(data);
       const id = adminData.data.id;
-      // return id;
+      return id;
     }
-    return 'fa6088e9-fb50-45c4-b57d-51485d2e5686';
+    // return 'fa6088e9-fb50-45c4-b57d-51485d2e5686';
   }
 
   saveAdmin(data: any) {
@@ -44,9 +44,10 @@ export class AuthService {
       const data: any = localStorage.getItem('admin');
       const adminData: any = JSON.parse(data);
       const token = adminData.data.token;
-      // return token;
+      console.log(token);
+      return token;
     }
-    return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTgyMzYzN30.bHzONtC-qzwzHLDAx8mF2kHNtx4Gug3LTrnl4jnImZw';
+    // return 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6ImZhNjA4OGU5LWZiNTAtNDVjNC1iNTdkLTUxNDg1ZDJlNTY4NiIsImV4cCI6MTYzOTgyMzYzN30.bHzONtC-qzwzHLDAx8mF2kHNtx4Gug3LTrnl4jnImZw';
   }
 
   logout() {
