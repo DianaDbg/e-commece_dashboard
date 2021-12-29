@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { LoginAdmin } from '../../models/loginAdmin';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -16,7 +15,6 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private authService: AuthService,
-    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -34,19 +32,12 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(loginPayload).subscribe(
       (response) => {
-        console.log('Login sucessfully', response);
-        this.router.navigate(['/dashboard']);
+        this.authService.saveUserData(response);
+        window.location.reload();
       },
       (error) => {
         console.log('Login error', error);
       }
     );
   }
-
-  // submit() {
-  //   if (!this.loginForm.valid) {
-  //     return;
-  //   }
-  //   console.log(this.loginForm.value);
-  // }
 }

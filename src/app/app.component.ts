@@ -9,8 +9,7 @@ import { AuthService } from 'src/app/public/auth/services/auth/auth.service';
 })
 export class AppComponent implements OnInit {
   loggedIn = this.authService.hasToken();
+
   constructor(private authService: AuthService) {}
-  ngOnInit() {
-    // console.log(this.loggedIn);
-  }
+  ngOnInit() {}
 }

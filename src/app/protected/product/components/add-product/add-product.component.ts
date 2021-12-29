@@ -178,12 +178,13 @@ export class AddProductComponent implements OnInit {
         console.log('Product saved !', response);
         // this.productId = response.data.colors;
         console.log(this.productId);
+        this.router.navigate(['/product-list']);
+        // window.location.reload();
         this.toastNotification(
           'Notification',
           'Product added sucessfully !',
           DialogLayoutDisplay.SUCCESS
         );
-        this.router.navigate(['/product-lit']);
       },
       (error: any) => {
         console.error('Product not saved !', error);
