@@ -84,11 +84,11 @@ export class UpdateProductComponent implements OnInit {
       .subscribe(
         (response: any) => {
           this.productData = response.data;
-          console.log('Product by id', this.productData.name);
+          console.log('Product by slug', this.productData.slug);
           this.updateProductForm = this.formBuilder.group({
             name: [this.productData.name, Validators.required],
             slug: [this.productData.slug, Validators.required],
-            category: [this.productData.category, Validators.required],
+            category: [this.productData?.category, Validators.required],
             price: [this.productData.price, Validators.required],
             stock: [this.productData.quantity, Validators.required],
             description: [this.productData.description, Validators.required],

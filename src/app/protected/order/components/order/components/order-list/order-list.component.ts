@@ -1,16 +1,18 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
   ColumnMode,
   DatatableComponent,
   SelectionType,
 } from '@swimlane/ngx-datatable';
+import { Order } from 'src/app/protected/order/models/order';
+import { OrderService } from 'src/app/protected/order/services/order.service';
 
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
   styleUrls: ['./order-list.component.scss'],
 })
-export class OrderListComponent {
+export class OrderListComponent implements OnInit {
   rows = [
     {
       id: '#A453J',
@@ -119,6 +121,8 @@ export class OrderListComponent {
     },
   ];
 
+  orders!: Order[];
+
   columns = [
     { prop: 'customers' },
     { name: 'Id' },
@@ -126,6 +130,18 @@ export class OrderListComponent {
     { name: 'Items' },
     { name: 'Status' },
   ];
+
+  // columns = [
+  //   { prop: 'customers' },
+  //   { name: 'number' },
+  //   { name: 'created_at' },
+  //   { name: 'Items' },
+  //   { name: 'Status' },
+  // ];
+
+  ngOnInit() {
+    this.getOrders();
+  }
 
   @ViewChild(DatatableComponent)
   table!: DatatableComponent;
@@ -135,13 +151,12 @@ export class OrderListComponent {
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   temp: any = this.rows;
-  constructor() {
+  constructor(private orderService: OrderService) {
     this.temp = this.rows;
   }
 
   onSelect({ selected }: any) {
     console.log('Select Event', selected, this.selected);
-
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
   }
@@ -172,5 +187,17 @@ export class OrderListComponent {
     this.rows = temp;
     // Whenever the filter changes, always go back to the first page
     this.table.offset = 0;
+  }
+
+  getOrders() {
+    this.orderService.getOrders().subscribe(
+      (response) => {
+        console.log('getOders sucess !', response);
+        this.orders = response.results;
+      },
+      (error) => {
+        console.log('getOrders failed !', error);
+      }
+    );
   }
 }
