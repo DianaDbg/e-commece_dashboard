@@ -81,7 +81,7 @@ export class CategoryComponent implements OnInit {
 
       this.categoryService.saveCategory(categoryPayload).subscribe(
         (response) => {
-          this.categories.push(categoryPayload);
+          this.categories = [...this.categories, categoryPayload];
           this.toastNotification(
             'Notification',
             'Category added sucessfully !',
