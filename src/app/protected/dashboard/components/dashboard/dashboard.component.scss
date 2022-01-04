@@ -1,17 +1,68 @@
-div.grid-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+div.container {
+  display: grid;
+  grid-template-areas:
+    "boxes boxes boxes boxes"
+    "chart chart chart chart"
+    "products products customers customers";
+  // grid-template-columns: 1fr 1fr 1fr;
+
+  justify-content: space-between;
   width: 100%;
-  padding: 10px;
+}
+
+div.item-1 {
+  margin-top: 20px;
+  margin-bottom: 10px !important;
+  grid-area: boxes;
+  display: flex;
+  justify-content: space-between;
+}
+
+div.item-2 {
+  mat-card {
+    margin-top: 10px !important;
+  }
+  grid-area: chart;
+}
+
+div.item-3 {
+  grid-area: products;
+  margin: 40px 10px 60px 40px;
+  mat-card {
+    padding: 30px 60px;
+    border-radius: 12px;
+    margin: 0 !important;
+    h3 {
+      font-family: "Lato";
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+}
+
+div.item-4 {
+  grid-area: customers;
+  margin: 40px 40px 60px 10px;
+  mat-card {
+    padding: 25px;
+    border-radius: 12px;
+    margin: 0 !important;
+    h3 {
+      font-family: "Lato";
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
 }
 
 .chart-card {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
   border-radius: 12px;
-  width: 84%;
+
   height: 473px;
-  margin-top: 0;
+
+  margin-top: 40px;
+
   h3 {
     font-family: "Lato";
     font-weight: 600;
@@ -20,8 +71,6 @@ div.grid-container {
 }
 
 .dashboard-card {
-  display: flex;
-  align-items: center;
   width: 350px;
   padding: 32px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1) !important;
