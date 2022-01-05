@@ -1,0 +1,15 @@
+<div class="customer-list">
+  <ul>
+    <li *ngFor="let customer of Customers">
+      <div class="customer-container">
+        <div class="customer-avatar">
+          <img src="{{ customer.img }}" alt="avatar" />
+        </div>
+        <div class="customer-infos">
+          <p class="customer-name">{{ customer.name }}</p>
+          <p class="customer-email">{{ customer.email }}</p>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

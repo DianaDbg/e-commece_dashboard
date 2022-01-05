@@ -1,0 +1,27 @@
+<div>
+  <ngx-datatable
+    #table
+    class="material"
+    [rows]="products"
+    [columns]="columns"
+    [columnMode]="ColumnMode.force"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    rowHeight="auto"
+    [limit]="5"
+    [scrollbarH]="true"
+  >
+    <ngx-datatable-column
+      [width]="20"
+      [canAutoResize]="false"
+      [draggable]="false"
+      [resizeable]="false"
+    >
+      <ng-template ngx-datatable-cell-template let-value="value"> </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name"></ngx-datatable-column>
+    <ngx-datatable-column name="Description"></ngx-datatable-column>
+    <ngx-datatable-column name="Quantity"></ngx-datatable-column>
+    <ngx-datatable-column name="Price"></ngx-datatable-column>
+  </ngx-datatable>
+</div>

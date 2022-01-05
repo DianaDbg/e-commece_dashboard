@@ -1,0 +1,36 @@
+.customer-list {
+  ul {
+    padding: 0;
+    li {
+      list-style: none;
+
+      .customer-container {
+        padding: 6.5px;
+        display: flex;
+        .customer-avatar {
+          padding-right: 20px;
+        }
+
+        .customer-infos {
+          .customer-name {
+            font-family: Lato;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 0.4px;
+          }
+
+          .customer-email {
+            font-family: Lato;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 13.33px;
+            line-height: 16px;
+            color: #929292;
+          }
+        }
+      }
+    }
+  }
+}
