@@ -131,14 +131,6 @@ export class OrderListComponent implements OnInit {
     { name: 'Status' },
   ];
 
-  // columns = [
-  //   { prop: 'customers' },
-  //   { name: 'number' },
-  //   { name: 'created_at' },
-  //   { name: 'Items' },
-  //   { name: 'Status' },
-  // ];
-
   ngOnInit() {
     this.getOrders();
   }
