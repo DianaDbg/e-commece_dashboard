@@ -122,8 +122,8 @@ export class ProductService {
           this.createSize(colorForm, color);
           console.log('Before save color', color);
           this.colorService.saveColor(color).subscribe((response: any) => {
-            (<Color[]>product.colors).push(response.data.id!);
-            console.log('after save color : ', product.colors);
+            product.colors = [...product.colors, response.data.id!];
+            console.log('After save color : ', product.colors);
           });
         });
       })
@@ -147,23 +147,37 @@ export class ProductService {
       colors: [],
     };
 
-    this.createColor(productForm, product, userId);
+    return this.createColor(productForm, product, userId).then((item: any) => {
+      return this.httpClient.post<Product>(
+        this.baseUrl,
+        {
+          ...item.product,
+          created_by: this.authService.getId(),
+        },
+        {
+          headers: new HttpHeaders({
+            Authorization: 'token ' + this.authService.getToken(),
+            'Content-Type': 'application/json',
+          }),
+        }
+      );
+    });
     // console.log('Before create product', product);
     // this.saveProduct(product).subscribe((response) =>
     //   console.log('After save product :', response)
     // );
-    return this.httpClient.post<Product>(
-      this.baseUrl,
-      {
-        ...product,
-        created_by: this.authService.getId(),
-      },
-      {
-        headers: new HttpHeaders({
-          Authorization: 'token ' + this.authService.getToken(),
-          'Content-Type': 'application/json',
-        }),
-      }
-    );
+    // return this.httpClient.post<Product>(
+    //   this.baseUrl,
+    //   {
+    //     ...product,
+    //     created_by: this.authService.getId(),
+    //   },
+    //   {
+    //     headers: new HttpHeaders({
+    //       Authorization: 'token ' + this.authService.getToken(),
+    //       'Content-Type': 'application/json',
+    //     }),
+    //   }
+    // );
   }
 }

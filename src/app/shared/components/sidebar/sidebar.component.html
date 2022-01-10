@@ -67,12 +67,18 @@
         [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu"
       >
-        <mat-icon style="color: #140e00; font-size: 32px"
-          >account_circle</mat-icon
-        >
+        <img
+          src="../../../../assets/Image-0.png"
+          width="40"
+          height="40"
+          alt=""
+        />
       </button>
+
+      <!-- <a mat-list-item  routerLinkActive="active"></a> -->
+
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/profile">
           <mat-icon>person</mat-icon>
           <span>Profil</span>
         </button>
