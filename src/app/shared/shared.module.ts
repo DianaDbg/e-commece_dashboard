@@ -25,9 +25,10 @@ import { HttpClientModule } from '@angular/common/http';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatChipsModule } from '@angular/material/chips';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
-  declarations: [SidebarComponent],
+  declarations: [SidebarComponent, ProfileComponent],
   imports: [
     RouterModule,
     CommonModule,

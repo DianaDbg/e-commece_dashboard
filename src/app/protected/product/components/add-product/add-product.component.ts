@@ -173,7 +173,7 @@ export class AddProductComponent implements OnInit {
     //   colors: [],
     // };
 
-    this.productService.createProduct(this.productForm.value).subscribe(
+    this.productService.createProduct(this.productForm.value).then(
       (response: any) => {
         console.log('Product saved !', response);
         // this.productId = response.data.colors;
