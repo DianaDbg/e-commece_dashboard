@@ -5,6 +5,7 @@ import {
   FormBuilder,
   FormControl,
 } from '@angular/forms';
+
 import { FileService } from 'src/app/core/services/File/file.service';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category/category.service';
@@ -14,6 +15,7 @@ import {
   AppearanceAnimation,
   DisappearanceAnimation,
 } from '@costlydeveloper/ngx-awesome-popup';
+
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
 
 @Component({
