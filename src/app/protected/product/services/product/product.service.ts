@@ -41,6 +41,7 @@ export class ProductService {
   getProductById(id: string) {
     return this.httpClient.get<Response<Product>>(this.baseUrl + '/' + id);
   }
+
   saveProduct(product: Product) {
     return this.httpClient.post<Product>(
       this.baseUrl,
@@ -110,7 +111,7 @@ export class ProductService {
 
         console.log(n_match[3]);
 
-        const color: ColorDto = {
+        const color: Color = {
           name: n_match[3],
           code: colorForm.code,
           sizes: [],
@@ -128,7 +129,6 @@ export class ProductService {
         });
       })
     );
-
     return promise;
   }
 

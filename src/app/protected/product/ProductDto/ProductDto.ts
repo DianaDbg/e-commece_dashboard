@@ -1,9 +1,11 @@
 import { Size } from '../models/size';
+
 export interface ColorForm {
   name: string;
   code: string;
   images: File[];
   sizes: Size[];
+  created_by?: string;
 }
 export interface ProductForm {
   name: string;
