@@ -26,4 +26,8 @@ export class ProfileComponent implements OnInit {
       street: new FormControl(),
     });
   }
+
+  updateProfile() {
+    console.log(this.userForm.value);
+  }
 }
