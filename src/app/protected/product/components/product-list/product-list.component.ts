@@ -46,7 +46,6 @@ export class ProductListComponent implements OnInit {
   ngOnInit(): void {
     this.temp = this.products;
     this.getProducts();
-    this.productService.checkNtc();
   }
 
   onSelect({ selected }: any) {

@@ -10,7 +10,7 @@ import { Sizes } from 'src/app/core/enums/sizes';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category/category.service';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
-import { FileService } from 'src/app/core/services/File/file.service';
+import { FileService } from 'src/app/core/services/file/file.service';
 import { ProductService } from '../../services/product/product.service';
 import { SizeService } from 'src/app/core/services/size/size.service';
 import { ColorService } from '../../../../core/services/color/color.service';
@@ -23,7 +23,6 @@ import {
 } from '@costlydeveloper/ngx-awesome-popup';
 import { File } from '../../models/file';
 import { Router } from '@angular/router';
-import { ColorDto, ProductForm } from '../../ProductDto/ProductDto';
 declare var ntc: any;
 import '../../../../core/utils/ntc.js';
 import { Color } from '../../models/color';
@@ -267,12 +266,9 @@ export class AddProductComponent implements OnInit {
         color.name = n_match[3];
         color.images = await this.uploadPoductFile(color);
         color.sizes = this.creativeSize(color);
-        console.log('Colors:', color);
         setTimeout(() => {
           this.colorService.saveColor(color).subscribe((response: any) => {
-            console.log('ColorTable0', this.colors_);
             this.colors_ = [...this.colors_, response.data.id];
-            console.log('ColorTable1', this.colors_);
           });
         }, 1000);
       })
@@ -296,8 +292,6 @@ export class AddProductComponent implements OnInit {
           is_active: true,
           colors: this.colors_,
         };
-
-        console.log('ColorTable2', this.colors_);
 
         await this.productService.saveProduct(productPayload).subscribe(
           (response: any) => {
