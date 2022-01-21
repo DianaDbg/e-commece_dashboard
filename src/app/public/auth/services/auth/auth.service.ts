@@ -37,22 +37,21 @@ export class AuthService {
   }
 
   saveUserData(data: any) {
-    window.sessionStorage.removeItem(USER_DATA);
-    window.sessionStorage.setItem(USER_DATA, JSON.stringify(data));
+    window.localStorage.removeItem(USER_DATA);
+    window.localStorage.setItem(USER_DATA, JSON.stringify(data));
   }
 
   getToken() {
-    if (window.sessionStorage.getItem(USER_DATA)) {
-      const userData: any = window.sessionStorage.getItem(USER_DATA);
+    if (window.localStorage.getItem(USER_DATA)) {
+      const userData: any = window.localStorage.getItem(USER_DATA);
       const adminData: any = JSON.parse(userData);
       const token = adminData.data.token;
-      console.log(token);
       return token;
     }
   }
 
   logout() {
-    window.sessionStorage.clear();
+    window.localStorage.clear();
     window.location.reload();
   }
 }

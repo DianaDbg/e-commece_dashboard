@@ -59,17 +59,17 @@ export class ProductListComponent implements OnInit {
     this.productId = event?.row?.id;
   }
 
-  add() {
-    this.selected.push(this.products[1], this.products[3]);
-  }
+  // add() {
+  //   this.selected.push(this.products[1], this.products[3]);
+  // }
 
-  update() {
-    this.selected = [this.products[1], this.products[3]];
-  }
+  // update() {
+  //   this.selected = [this.products[1], this.products[3]];
+  // }
 
-  remove() {
-    this.selected = [];
-  }
+  // remove() {
+  //   this.selected = [];
+  // }
 
   updateFilter(event: any) {
     const val = event.target.value.toLowerCase();
@@ -96,10 +96,10 @@ export class ProductListComponent implements OnInit {
   deleteProduct(id: string) {
     this.productService.deleteProduct(id).subscribe(
       (response) => {
-        console.log('Product deleted !');
+        console.log('Product deleted !', response);
         this.products = this.products.filter((item) => item.id != id);
       },
-      (error) => console.log('Product not deleted !')
+      (error) => console.log('Product not deleted !', error)
     );
   }
 

@@ -7,7 +7,7 @@
         mat-input
         ype="text"
         placeholder="Type to filter the customer column..."
-        (keyup)="updateFilter($event)"
+        ((keyup))="updateFilter($event)"
       />
       <div class="options">
         <mat-icon>more_vert</mat-icon>
@@ -19,13 +19,13 @@
     <ngx-datatable
       #table
       class="material"
-      [rows]="rows"
+      [rows]="_orders"
       [columns]="columns"
       [columnMode]="ColumnMode.force"
       [headerHeight]="50"
       [footerHeight]="50"
       rowHeight="auto"
-      [limit]="10"
+      [limit]="8"
       [selected]="selected"
       [selectionType]="SelectionType.checkbox"
       (activate)="onActivate($event)"
@@ -64,11 +64,37 @@
           />
         </ng-template>
       </ngx-datatable-column>
-      <ngx-datatable-column name="ID"></ngx-datatable-column>
-      <ngx-datatable-column name="Date"></ngx-datatable-column>
-      <ngx-datatable-column name="Customers"></ngx-datatable-column>
+      <ngx-datatable-column name="Number"></ngx-datatable-column>
+      <ngx-datatable-column name="Customer"></ngx-datatable-column>
+      <ngx-datatable-column name="Price"></ngx-datatable-column>
       <ngx-datatable-column name="Items"></ngx-datatable-column>
+      <ngx-datatable-column name="Payment"></ngx-datatable-column>
       <ngx-datatable-column name="Status"></ngx-datatable-column>
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="id">
+        <ng-template
+          let-row="row"
+          let-value="value"
+          ngx-datatable-cell-template
+        >
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon style="color: #b1b1b1">more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button (click)="goToOrderDetails()" mat-menu-item>
+              View Order
+            </button>
+            <button (click)="confirmOrder()" mat-menu-item>
+              Confirm Order
+            </button>
+            <button (click)="cancelOrder()" mat-menu-item>Cancel Order</button>
+          </mat-menu>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
   </div>
 </mat-card>
