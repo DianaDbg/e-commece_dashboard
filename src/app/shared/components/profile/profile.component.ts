@@ -43,7 +43,7 @@ export class ProfileComponent implements OnInit {
       state: new FormControl(),
       city: new FormControl(),
       street: new FormControl(),
-      profile_picture: new FormControl(null),
+      profile_picture: new FormControl(),
     });
   }
 
@@ -108,14 +108,16 @@ export class ProfileComponent implements OnInit {
               address: await this.adressId,
               profile_picture: await this.fileId,
             };
-            this.UserService.updateUser(userPayload).subscribe(
-              (response) => {
-                console.log(response);
-              },
-              (error) => {
-                console.error(error);
-              }
-            );
+            setTimeout(() => {
+              this.UserService.updateUser(userPayload).subscribe(
+                (response) => {
+                  console.log(response);
+                },
+                (error) => {
+                  console.error(error);
+                }
+              );
+            }, 1000);
           })
           .catch((error) => {
             console.error(error);

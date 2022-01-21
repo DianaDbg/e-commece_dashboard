@@ -25,7 +25,7 @@ export class OrderService {
     });
   }
 
-  confirmOrder(order_id: number) {
+  confirmOrder(order_id: string) {
     return this.httpClient.put(this.baseUrl + `${order_id}` + '/confirm', {
       headers: new HttpHeaders({
         Authorization: 'token ' + this.authService.getToken(),
@@ -34,7 +34,7 @@ export class OrderService {
     });
   }
 
-  cancelOrder(order_id: number) {
+  cancelOrder(order_id: string) {
     return this.httpClient.delete(this.baseUrl + `${order_id}`, {
       headers: new HttpHeaders({
         Authorization: 'token ' + this.authService.getToken(),
