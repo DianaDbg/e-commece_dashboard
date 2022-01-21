@@ -100,7 +100,7 @@ export class OrderListComponent implements OnInit {
             customer: order?.shipping_address?.address?.name,
             price: '$' + order.total_prices,
             items: await order.cart.items.length,
-            payment: order.payment_method,
+            payment: await this.toCapitalize(order.payment_method),
             status: await this.toCapitalize(order.status),
           };
           this._orders = [...this._orders, payload];
