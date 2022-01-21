@@ -26,12 +26,17 @@ export class OrderService {
   }
 
   confirmOrder(order_id: string) {
-    return this.httpClient.put(this.baseUrl + `${order_id}` + '/confirm', {
-      headers: new HttpHeaders({
-        Authorization: 'token ' + this.authService.getToken(),
-        'Content-Type': 'application/json',
-      }),
-    });
+    let token = 'token ' + this.authService.getToken();
+    return this.httpClient.put(
+      this.baseUrl + `${order_id}` + '/confirm',
+      {},
+      {
+        headers: new HttpHeaders({
+          Authorization: token,
+          'Content-Type': 'application/json',
+        }),
+      }
+    );
   }
 
   cancelOrder(order_id: string) {

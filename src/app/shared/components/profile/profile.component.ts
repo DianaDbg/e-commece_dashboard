@@ -7,6 +7,12 @@ import { AddressService } from 'src/app/core/services/address/address.service';
 import { Address } from '../../models/address/address';
 import { User } from '../../models/user/user';
 import { UserService } from 'src/app/core/services/user/user.service';
+import {
+  AppearanceAnimation,
+  DialogLayoutDisplay,
+  DisappearanceAnimation,
+  ToastNotificationInitializer,
+} from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-profile',
@@ -112,6 +118,11 @@ export class ProfileComponent implements OnInit {
               this.UserService.updateUser(userPayload).subscribe(
                 (response) => {
                   console.log(response);
+                  this.toastNotification(
+                    'Notification',
+                    'Profile updated !',
+                    DialogLayoutDisplay.SUCCESS
+                  );
                 },
                 (error) => {
                   console.error(error);
@@ -126,5 +137,23 @@ export class ProfileComponent implements OnInit {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  toastNotification(
+    title: string,
+    message: string,
+    status: DialogLayoutDisplay
+  ) {
+    const newToastNotification = new ToastNotificationInitializer();
+    newToastNotification.setTitle(title);
+    newToastNotification.setMessage(message);
+
+    newToastNotification.setConfig({
+      LayoutType: status, // SUCCESS | INFO | NONE | DANGER | WARNING
+      AnimationIn: AppearanceAnimation.ELASTIC,
+      AnimationOut: DisappearanceAnimation.FLIP_OUT,
+    });
+
+    newToastNotification.openToastNotification$();
   }
 }

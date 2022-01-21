@@ -7,7 +7,12 @@ import {
 } from '@swimlane/ngx-datatable';
 import { Order } from 'src/app/protected/order/models/order';
 import { OrderService } from 'src/app/protected/order/services/order.service';
-
+import {
+  DialogLayoutDisplay,
+  ToastNotificationInitializer,
+  AppearanceAnimation,
+  DisappearanceAnimation,
+} from '@costlydeveloper/ngx-awesome-popup';
 @Component({
   selector: 'app-order-list',
   templateUrl: './order-list.component.html',
@@ -109,8 +114,14 @@ export class OrderListComponent implements OnInit {
 
   confirmOrder() {
     this.orderService.confirmOrder(this.orderId).subscribe(
-      (response) => {
+      (response: any) => {
         console.log('Order confirmed !', response);
+        window.location.reload();
+        this.toastNotification(
+          'Notification',
+          'Order confirmed !',
+          DialogLayoutDisplay.SUCCESS
+        );
       },
       (error) => {
         console.error(error);
@@ -122,14 +133,44 @@ export class OrderListComponent implements OnInit {
     this.orderService.cancelOrder(this.orderId).subscribe(
       (response) => {
         console.log('Order canceled !', response);
+        window.location.reload();
+        this._orders = [...this._orders];
+        this.toastNotification(
+          'Notification',
+          'Order canceled !',
+          DialogLayoutDisplay.SUCCESS
+        );
       },
       (error) => {
         console.error(error);
+        this.toastNotification(
+          'Notification',
+          'Order canceled !',
+          DialogLayoutDisplay.SUCCESS
+        );
       }
     );
   }
 
   goToOrderDetails() {
     this.router.navigate(['/order/' + this.orderId]);
+  }
+
+  toastNotification(
+    title: string,
+    message: string,
+    status: DialogLayoutDisplay
+  ) {
+    const newToastNotification = new ToastNotificationInitializer();
+    newToastNotification.setTitle(title);
+    newToastNotification.setMessage(message);
+
+    newToastNotification.setConfig({
+      LayoutType: status, // SUCCESS | INFO | NONE | DANGER | WARNING
+      AnimationIn: AppearanceAnimation.ELASTIC,
+      AnimationOut: DisappearanceAnimation.FLIP_OUT,
+    });
+
+    newToastNotification.openToastNotification$();
   }
 }
