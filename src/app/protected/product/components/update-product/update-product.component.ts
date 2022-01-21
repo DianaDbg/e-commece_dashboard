@@ -10,7 +10,7 @@ import { Sizes } from 'src/app/core/enums/sizes';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category/category.service';
 import { FileUploadValidators } from '@iplab/ngx-file-upload';
-import { FileService } from 'src/app/core/services/File/file.service';
+import { FileService } from 'src/app/core/services/file/file.service';
 import { ProductService } from '../../services/product/product.service';
 import { Product } from '../../models/product';
 import {

@@ -1,6 +1,6 @@
 <div class="profile-box">
   <h3>User Profile</h3>
-  <form [formGroup]="userForm">
+  <form [formGroup]="userForm" (ngSubmit)="updateProfile()">
     <div class="profile-image">
       <div class="profilepic">
         <img
@@ -13,7 +13,12 @@
         <div class="profilepic__content">
           <span class="profilepic__icon"><mat-icon>add_a_photo</mat-icon></span>
           <span class="profilepic__text">Edit Profile</span>
-          <input type="file" class="upload" />
+          <input
+            type="file"
+            class="upload"
+            name="profile_picture"
+            (change)="handleFile($event)"
+          />
         </div>
       </div>
     </div>
@@ -32,6 +37,24 @@
     </div>
 
     <div class="user-infos">
+      <mat-form-field class="form-field" appearance="outline" color="accent">
+        <mat-label> Username </mat-label>
+        <input matInput formControlName="username" type="username" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="mr-4">
+        <mat-label>Gender</mat-label>
+        <mat-select id="gender" formControlName="gender" required>
+          <mat-option
+            *ngFor="let gender of genders | keyvalue"
+            [value]="gender.value"
+            >{{ gender.key }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="user-infos">
       <mat-form-field
         class="form-field email"
         appearance="outline"
@@ -45,12 +68,41 @@
     <div class="user-infos">
       <mat-form-field class="form-field" appearance="outline" color="accent">
         <mat-label> Password </mat-label>
-        <input matInput formControlName="password" required />
+        <input
+          matInput
+          formControlName="password"
+          [type]="hide ? 'password' : 'text'"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
       </mat-form-field>
 
       <mat-form-field class="form-field" appearance="outline" color="accent">
         <mat-label> Confirm Password </mat-label>
-        <input matInput formControlName="confirm_password" required />
+        <input
+          matInput
+          formControlName="confirm_password"
+          [type]="hide ? 'password' : 'text'"
+          type="password"
+          required
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
       </mat-form-field>
     </div>
 

@@ -6,7 +6,7 @@ import {
   FormControl,
 } from '@angular/forms';
 
-import { FileService } from 'src/app/core/services/File/file.service';
+import { FileService } from 'src/app/core/services/file/file.service';
 import { Category } from '../../models/category';
 import { CategoryService } from '../../services/category/category.service';
 import {
