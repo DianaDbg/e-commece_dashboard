@@ -1,21 +1,37 @@
-<div class="grid-container">
-  <mat-card class="dashboard-card" *ngFor="let card of cards">
-    <mat-card-content class="dashboard-card-content">
-      <div class="row-img">
-        <img src="{{ card.img }}" width="" alt="" />
-      </div>
+<div class="container">
+  <div class="item item-1">
+    <mat-card class="dashboard-card" *ngFor="let card of cards">
+      <mat-card-content class="dashboard-card-content">
+        <div class="row-img">
+          <img src="{{ card.img }}" width="" alt="" />
+        </div>
 
-      <div class="row-text">
-        <div class="title">{{ card.title }}</div>
-        <div class="number">{{ card.number }}</div>
-      </div>
-    </mat-card-content>
-  </mat-card>
-</div>
+        <div class="row-text">
+          <div class="title">{{ card.title }}</div>
+          <div class="number">{{ card.number }}</div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
 
-<div class="grid-container">
-  <mat-card class="chart-card">
-    <h3>Earnings</h3>
-    <app-area-chart></app-area-chart>
-  </mat-card>
+  <div class="item item-2">
+    <mat-card class="chart-card">
+      <h3>Earnings</h3>
+      <app-area-chart></app-area-chart>
+    </mat-card>
+  </div>
+
+  <div class="item item-3">
+    <mat-card class="">
+      <h3>Top Selling Products</h3>
+      <app-top-products></app-top-products>
+    </mat-card>
+  </div>
+
+  <div class="item item-4">
+    <mat-card class="">
+      <h3>Top Customers</h3>
+      <app-top-customers></app-top-customers>
+    </mat-card>
+  </div>
 </div>

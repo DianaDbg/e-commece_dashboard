@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AuthService } from 'src/app/public/auth/services/auth/auth.service';
+import { AuthService } from '../../../../public/auth/services/auth/auth.service';
 import { environment } from 'src/environments/environment';
-import { Response } from 'src/app/shared/models/response/response';
+import { File } from '../../models/file';
+import { Response } from '../../../../shared/models/response/response';
 import { Product } from '../../models/product';
 
 @Injectable({
@@ -15,24 +16,18 @@ export class ProductService {
     private httpClient: HttpClient,
     private authService: AuthService
   ) {}
-
   // UTILS
   getFirstImage(product: Product) {
     let file: string = '...';
-
     if (typeof product.colors[0] === 'object') {
-      file = product.colors[0].images[0].file;
+      file = (<File>product.colors[0].images[0]).file;
     }
-
     return file;
   }
-
   //HTTP REQUESTS
-
-  getProducts() {
-    return this.httpClient.get<Response<Product[]>>(this.baseUrl);
+  getProducts(url?: string) {
+    return this.httpClient.get<Response<Product[]>>(url ? url : this.baseUrl);
   }
-
   getProductById(id: string) {
     return this.httpClient.get<Response<Product>>(this.baseUrl + '/' + id);
   }
@@ -62,8 +57,8 @@ export class ProductService {
     });
   }
 
-  deleteProduct(product: Product) {
-    return this.httpClient.delete(this.baseUrl + '/' + product.id, {
+  deleteProduct(id: string) {
+    return this.httpClient.delete(this.baseUrl + '/' + id, {
       headers: new HttpHeaders({
         Authorization: 'token ' + this.authService.getToken(),
         'Content-Type': 'application/json',

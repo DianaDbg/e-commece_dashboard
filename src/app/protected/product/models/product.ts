@@ -7,7 +7,7 @@ export interface Product {
   slug: string;
   description: string;
   category: Category | string;
-  colors: Color[] | string;
+  colors: Color[];
   quantity: number;
   price: string;
   is_active: boolean;

@@ -1,1 +1,72 @@
-<p>customer works!</p>
+<mat-card>
+  <div class="table-header">
+    <h3>
+      Customers
+      <input
+        class="search"
+        mat-input
+        type="text"
+        placeholder="Type to filter the lastname column..."
+        (keyup)="updateFilter($event)"
+      />
+    </h3>
+  </div>
+
+  <div>
+    <ngx-datatable
+      #table
+      class="material"
+      [rows]="rows"
+      [columns]="columns"
+      [columnMode]="ColumnMode.force"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      rowHeight="auto"
+      [limit]="10"
+      [selected]="selected"
+      [selectionType]="SelectionType.checkbox"
+      (activate)="onActivate($event)"
+      (select)="onSelect($event)"
+      [scrollbarH]="true"
+    >
+      <ngx-datatable-column
+        [width]="30"
+        [sortable]="false"
+        [canAutoResize]="false"
+        [draggable]="false"
+        [resizeable]="false"
+      >
+        <ng-template
+          ngx-datatable-header-template
+          let-value="value"
+          let-allRowsSelected="allRowsSelected"
+          let-selectFn="selectFn"
+        >
+          <input
+            type="checkbox"
+            [checked]="allRowsSelected"
+            (change)="selectFn(!allRowsSelected)"
+          />
+        </ng-template>
+        <ng-template
+          ngx-datatable-cell-template
+          let-value="value"
+          let-isSelected="isSelected"
+          let-onCheckboxChangeFn="onCheckboxChangeFn"
+        >
+          <input
+            type="checkbox"
+            [checked]="isSelected"
+            (change)="onCheckboxChangeFn($event)"
+          />
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Firstname"></ngx-datatable-column>
+      <ngx-datatable-column name="Lastname"></ngx-datatable-column>
+      <ngx-datatable-column name="Email"></ngx-datatable-column>
+      <ngx-datatable-column name="Phone"></ngx-datatable-column>
+      <ngx-datatable-column name="Gender"></ngx-datatable-column>
+      <ngx-datatable-column name="Orders"></ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+</mat-card>

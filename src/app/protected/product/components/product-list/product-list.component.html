@@ -20,8 +20,7 @@
         placeholder="Type to filter the name column..."
         (keyup)="updateFilter($event)"
       />
-      <div>
-        <mat-icon>filter_list</mat-icon>
+      <div class="options">
         <mat-icon>more_vert</mat-icon>
       </div>
     </h3>
@@ -80,6 +79,45 @@
       <ngx-datatable-column name="Description"></ngx-datatable-column>
       <ngx-datatable-column name="Quantity"></ngx-datatable-column>
       <ngx-datatable-column name="Price"></ngx-datatable-column>
+
+      <ngx-datatable-column name="Actions" [sortable]="false" prop="id">
+        <ng-template
+          let-row="row"
+          let-value="value"
+          ngx-datatable-cell-template
+        >
+          <button
+            mat-icon-button
+            [matMenuTriggerFor]="menu"
+            aria-label="Example icon-button with a menu"
+          >
+            <mat-icon style="color: #b1b1b1">more_vert</mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button
+              (click)="goToProductDetails()"
+              style="color: rgba(61, 113, 255, 0.685)"
+              mat-menu-item
+            >
+              <mat-icon style="color: rgba(61, 113, 255, 0.685)"
+                >visibility</mat-icon
+              >
+              <span>View</span>
+            </button>
+            <button
+              (click)="confirmBox()"
+              style="color: rgba(255, 61, 61, 0.685)"
+              mat-menu-item
+            >
+              <mat-icon style="color: rgba(255, 61, 61, 0.685)"
+                >delete_outline</mat-icon
+              >
+              <span>Delete</span>
+            </button>
+          </mat-menu>
+        </ng-template>
+      </ngx-datatable-column>
     </ngx-datatable>
   </div>
 </mat-card>

@@ -8,13 +8,20 @@
 // @import url("../src/app/shared/components/sidebar/sidebar.component.scss");
 /* You can add global
  styles to this file, and also import other style files */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 html,
 body {
   height: 100%;
+  // background-color: rgb(255, 252, 243);
 }
+
 body {
   margin: 0;
-  font-family: Lato, "Helvetica Neue", sans-serif;
+  font-family: Lato, "Helvetica Neue", sans-serif !important;
 }
 
 /* For dataTable status cell*/
@@ -26,7 +33,7 @@ span[title="Pending"] {
   color: #8f6201;
 }
 
-span[title="Completed"] {
+span[title="Confirmed"] {
   padding: 10px 15px;
   background: rgba(62, 244, 153, 0.15);
   border-radius: 20.7887px;
@@ -38,6 +45,13 @@ span[title="Canceled"] {
   background: rgba(236, 20, 20, 0.1);
   border-radius: 20.7887px;
   color: #860000;
+}
+
+span[title="Initiated"] {
+  padding: 10px 15px;
+  background: rgba(20, 130, 233, 0.1);
+  border-radius: 20.7887px;
+  color: #0d1d52;
 }
 
 /* For dataTable status cell*/

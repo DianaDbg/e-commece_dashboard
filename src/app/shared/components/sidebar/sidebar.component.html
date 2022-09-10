@@ -54,7 +54,7 @@
         *ngIf="isHandset$ | async"
       >
         <mat-icon
-          style="color: #fff; font-size: 36px; margin-right: 20px"
+          style="color: #c28f2a; font-size: 36px; margin-right: 20px"
           aria-label="Side nav toggle icon"
           >menu</mat-icon
         >
@@ -67,14 +67,22 @@
         [matMenuTriggerFor]="menu"
         aria-label="Example icon-button with a menu"
       >
-        <mat-icon style="color: #fff; font-size: 32px">account_circle</mat-icon>
+        <img
+          src="../../../../assets/Image-0.png"
+          width="40"
+          height="40"
+          alt=""
+        />
       </button>
+
+      <!-- <a mat-list-item  routerLinkActive="active"></a> -->
+
       <mat-menu #menu="matMenu">
-        <button mat-menu-item>
+        <button mat-menu-item routerLink="/profile">
           <mat-icon>person</mat-icon>
           <span>Profil</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="logout()">
           <mat-icon>logout</mat-icon>
           <span>Logout</span>
         </button>

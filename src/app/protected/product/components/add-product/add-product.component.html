@@ -1,7 +1,7 @@
 <form [formGroup]="productForm" (ngSubmit)="addProduct()">
   <div class="add-product-form">
     <div class="add-product-form">
-      <mat-stepper #stepper linear>
+      <mat-stepper #stepper linear color="accent">
         <mat-step>
           <ng-template matStepLabel>Product Informations</ng-template>
           <ng-container class="card-one">
@@ -67,6 +67,7 @@
                   type="number"
                   required
                 />
+
                 <mat-error
                   *ngIf="
                     productForm?.controls?.price?.touched &&
@@ -152,8 +153,9 @@
                 type="button"
                 (click)="addColor()"
                 color="accent"
+                class="btn-add-color"
               >
-                <mat-icon>add_circle</mat-icon> Add Couleur
+                <mat-icon>add_circle</mat-icon> Add Color
               </button>
             </div>
 
@@ -256,19 +258,28 @@
                                   </span>
                                 </mat-error> -->
                                 </mat-form-field>
+                                <mat-icon
+                                  style="transform: translateY(-10px)"
+                                  color="accent"
+                                  (click)="removeSize(colorIndex, sizeIndex)"
+                                  >delete_outline</mat-icon
+                                >
                               </div>
                             </ng-container>
                           </ng-container>
                         </ng-container>
 
-                        <button
-                          mat-raised-button
-                          type="button"
-                          (click)="addSize(colorIndex)"
-                          color="accent"
-                        >
-                          <mat-icon>add_circle</mat-icon> Add Size
-                        </button>
+                        <div class="div-btn-add-size">
+                          <button
+                            mat-raised-button
+                            type="button"
+                            (click)="addSize(colorIndex)"
+                            color="accent"
+                            class="btn-add-size"
+                          >
+                            <mat-icon>add_circle</mat-icon> Add Size
+                          </button>
+                        </div>
 
                         <file-upload
                           formControlName="images"
@@ -277,6 +288,9 @@
                         ></file-upload>
                       </mat-expansion-panel>
                     </mat-accordion>
+                    <mat-icon color="accent" (click)="removeColor(colorIndex)"
+                      >delete_outline</mat-icon
+                    >
                   </div>
                 </ng-container>
               </ng-container>

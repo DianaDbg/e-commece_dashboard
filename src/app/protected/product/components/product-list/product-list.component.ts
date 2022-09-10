@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   ColumnMode,
   DatatableComponent,
@@ -6,6 +7,10 @@ import {
 } from '@swimlane/ngx-datatable';
 import { Product } from '../../models/product';
 import { ProductService } from '../../services/product/product.service';
+import {
+  DialogLayoutDisplay,
+  ConfirmBoxInitializer,
+} from '@costlydeveloper/ngx-awesome-popup';
 
 @Component({
   selector: 'app-product-list',
@@ -14,23 +19,8 @@ import { ProductService } from '../../services/product/product.service';
 })
 export class ProductListComponent implements OnInit {
   products!: Product[];
-  // rows = [
-  //   { name: 'Samson shoes', category: 'Shoes', price: '24.990', quantity: 12 },
-  //   { name: 'Samson Hat', category: 'Hat', price: '240', quantity: 20 },
-  //   { name: 'Samson T-Shirt', category: 'T-Shirt', price: '40', quantity: 15 },
-  //   { name: 'Samson boxer', category: 'Boxer', price: '50', quantity: 32 },
-  //   { name: 'Samson Pull', category: 'Pull', price: '150', quantity: 23 },
-  //   { name: 'Samson shoes', category: 'Shoes', price: '24.990', quantity: 12 },
-  //   { name: 'Samson Hat', category: 'Hat', price: '240', quantity: 20 },
-  //   { name: 'Samson T-Shirt', category: 'T-Shirt', price: '40', quantity: 15 },
-  //   { name: 'Samson boxer', category: 'Boxer', price: '50', quantity: 32 },
-  //   { name: 'Samson Pull', category: 'Pull', price: '150', quantity: 23 },
-  //   { name: 'Samson Pull', category: 'Pull', price: '150', quantity: 23 },
-  //   { name: 'Samson shoes', category: 'Shoes', price: '24.990', quantity: 12 },
-  //   { name: 'Samson Hat', category: 'Hat', price: '240', quantity: 20 },
-  //   { name: 'Samson T-Shirt', category: 'T-Shirt', price: '40', quantity: 15 },
-  //   { name: 'Samson boxer', category: 'Boxer', price: '50', quantity: 32 },
-  // ];
+  @Input()
+  product!: Product;
 
   columns = [
     { prop: 'name' },
@@ -47,37 +37,39 @@ export class ProductListComponent implements OnInit {
   ColumnMode = ColumnMode;
   SelectionType = SelectionType;
   temp: any = this.products;
+  productId!: string;
 
-  constructor(private productService: ProductService) {
+  constructor(private productService: ProductService, private router: Router) {
     this.temp = this.products;
   }
 
   ngOnInit(): void {
+    this.temp = this.products;
     this.getProducts();
   }
 
   onSelect({ selected }: any) {
     console.log('Select Event', selected, this.selected);
-
     this.selected.splice(0, this.selected.length);
     this.selected.push(...selected);
   }
 
   onActivate(event: any) {
-    console.log('Activate Event', event);
+    console.log('Selected :', event?.row?.id);
+    this.productId = event?.row?.id;
   }
 
-  add() {
-    this.selected.push(this.products[1], this.products[3]);
-  }
+  // add() {
+  //   this.selected.push(this.products[1], this.products[3]);
+  // }
 
-  update() {
-    this.selected = [this.products[1], this.products[3]];
-  }
+  // update() {
+  //   this.selected = [this.products[1], this.products[3]];
+  // }
 
-  remove() {
-    this.selected = [];
-  }
+  // remove() {
+  //   this.selected = [];
+  // }
 
   updateFilter(event: any) {
     const val = event.target.value.toLowerCase();
@@ -97,9 +89,39 @@ export class ProductListComponent implements OnInit {
         this.products = response.results;
         console.log(this.products);
       },
-      (error) => {
-        console.log(error);
-      }
+      (error) => console.log(error)
     );
+  }
+
+  deleteProduct(id: string) {
+    this.productService.deleteProduct(id).subscribe(
+      (response) => {
+        console.log('Product deleted !', response);
+        this.products = this.products.filter((item) => item.id != id);
+      },
+      (error) => console.log('Product not deleted !', error)
+    );
+  }
+
+  goToProductDetails() {
+    this.router.navigate(['/product-list/' + this.productId]);
+  }
+
+  confirmBox() {
+    const confirmBox = new ConfirmBoxInitializer();
+    confirmBox.setTitle('Are you sure?');
+    confirmBox.setMessage('Confirm to delete this product !');
+    confirmBox.setButtonLabels('YES', 'NO');
+
+    confirmBox.setConfig({
+      LayoutType: DialogLayoutDisplay.DANGER,
+    });
+
+    confirmBox.openConfirmBox$().subscribe((response) => {
+      console.log('Clicked button response: ', response);
+      if (response.Success) {
+        this.deleteProduct(this.productId);
+      }
+    });
   }
 }

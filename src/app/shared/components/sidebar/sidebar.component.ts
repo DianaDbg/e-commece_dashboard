@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { AuthService } from '../../../public/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -37,12 +37,12 @@ export class SidebarComponent {
 
   constructor(
     private breakpointObserver: BreakpointObserver,
-    private route: ActivatedRoute
+    private authService: AuthService
   ) {}
 
-  ngOnInit() {
-    // this.route.queryParams.subscribe(params => {
-    //   this.name = params['outlet'];
-    // });
+  ngOnInit() {}
+
+  logout() {
+    this.authService.logout();
   }
 }

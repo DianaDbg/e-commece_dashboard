@@ -1,0 +1,329 @@
+<form [formGroup]="updateProductForm" (ngSubmit)="updateProduct()">
+  <div class="add-product-form">
+    <div class="add-product-form">
+      <mat-stepper #stepper linear color="accent">
+        <mat-step>
+          <ng-template matStepLabel>Product Informations</ng-template>
+          <ng-container class="card-one">
+            <div class="form-row-1">
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Product name </mat-label>
+                <input matInput formControlName="name" required />
+                <!-- <mat-error
+                  *ngIf="
+                    updateProductForm?.controls?.name?.touched &&
+                    updateProductForm?.controls?.name?.invalid
+                  "
+                >
+                  <span
+                    *ngIf="updateProductForm?.controls?.name?.errors?.required"
+                  >
+                    This field is mandatory.
+                  </span>
+                </mat-error> -->
+              </mat-form-field>
+
+              <br />
+
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Slug </mat-label>
+                <input matInput formControlName="slug" required />
+              </mat-form-field>
+
+              <br />
+
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label>Product category</mat-label>
+                <mat-select formControlName="category">
+                  <mat-option
+                    *ngFor="let category of categories"
+                    value="{{ category?.id }}"
+                    >{{ category?.name }}</mat-option
+                  >
+                </mat-select>
+              </mat-form-field>
+            </div>
+
+            <div class="form-row-2">
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Price </mat-label>
+                <input
+                  matInput
+                  formControlName="price"
+                  type="number"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    updateProductForm?.controls?.price?.touched &&
+                    updateProductForm?.controls?.price?.invalid
+                  "
+                >
+                  <span
+                    *ngIf="updateProductForm?.controls?.price?.errors?.required"
+                  >
+                    This field is mandatory.
+                  </span>
+                </mat-error>
+              </mat-form-field>
+              <br />
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label> Stock </mat-label>
+                <input
+                  matInput
+                  formControlName="stock"
+                  type="number"
+                  required
+                />
+                <mat-error
+                  *ngIf="
+                    updateProductForm?.controls?.stock?.touched &&
+                    updateProductForm?.controls?.stock?.invalid
+                  "
+                >
+                  <span
+                    *ngIf="updateProductForm?.controls?.stock?.errors?.required"
+                  >
+                    This field is mandatory.
+                  </span>
+                </mat-error>
+              </mat-form-field>
+
+              <br />
+
+              <mat-form-field
+                class="form-field"
+                appearance="outline"
+                color="accent"
+              >
+                <mat-label>Description</mat-label>
+                <textarea
+                  matInput
+                  formControlName="description"
+                  required
+                ></textarea>
+                <mat-error
+                  *ngIf="
+                    updateProductForm?.controls?.description?.touched &&
+                    updateProductForm?.controls?.description?.invalid
+                  "
+                >
+                  <span
+                    *ngIf="
+                      updateProductForm?.controls?.description?.errors?.required
+                    "
+                    >This field is mandatory.</span
+                  >
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="btn-add-product" mat-button matStepperNext>
+              <button
+                mat-raised-button
+                style="min-width: 400px !important"
+                type="button"
+                color="accent"
+                mat-button
+                matStepperNext
+              >
+                Next
+              </button>
+            </div>
+          </ng-container>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Product Details</ng-template>
+          <ng-container class="card-two">
+            <div class="product-details">
+              <button
+                mat-raised-button
+                type="button"
+                (click)="addColor()"
+                color="accent"
+                class="btn-add-color"
+              >
+                <mat-icon>add_circle</mat-icon> Add Color
+              </button>
+            </div>
+
+            <br />
+
+            <ng-container formArrayName="colors">
+              <ng-container
+                *ngFor="let color of colors().controls; let colorIndex = index"
+              >
+                <ng-container [formGroupName]="'colorIndex'">
+                  <div class="div-variants">
+                    <mat-accordion>
+                      <mat-expansion-panel
+                        (opened)="panelOpenState = true"
+                        (closed)="panelOpenState = false"
+                      >
+                        <mat-expansion-panel-header>
+                          <mat-panel-title> Color </mat-panel-title>
+                          <mat-panel-description>
+                            <span>{{ colorIndex }}</span>
+                          </mat-panel-description>
+                        </mat-expansion-panel-header>
+                        <mat-form-field
+                          class="form-field"
+                          appearance="outline"
+                          color="accent"
+                        >
+                          <mat-label> Colors </mat-label>
+                          <input
+                            matInput
+                            formControlName="code"
+                            type="color"
+                            required
+                          />
+                          <!-- <mat-error
+                    *ngIf="
+                      colors?.controls?.code?.touched &&
+                      colors?.controls?.code?.invalid
+                    "
+                  >
+                    <span *ngIf="colors?.controls?.code?.errors?.required">
+                      This field is mandatory.
+                    </span>
+                  </mat-error> -->
+                        </mat-form-field>
+
+                        <br />
+
+                        <ng-container formArrayName="sizes">
+                          <ng-container
+                            *ngFor="
+                              let size of colorsSizes(colorIndex)?.controls;
+                              let sizeIndex = index
+                            "
+                          >
+                            <ng-container [formGroupName]="'sizeIndex'">
+                              <div class="size-section">
+                                <mat-form-field
+                                  class="form-field"
+                                  appearance="outline"
+                                  color="accent"
+                                >
+                                  <mat-label>Sizes {{ sizeIndex }}</mat-label>
+
+                                  <mat-select formControlName="size">
+                                    <mat-option
+                                      *ngFor="let size_ of Sizes | keyvalue"
+                                      value="{{ size_?.value }}"
+                                      >{{ size_?.key }}</mat-option
+                                    >
+                                  </mat-select>
+                                </mat-form-field>
+
+                                <mat-form-field
+                                  class="form-field"
+                                  appearance="outline"
+                                  color="accent"
+                                >
+                                  <mat-label> Quantity </mat-label>
+
+                                  <input
+                                    matInput
+                                    formControlName="quantity"
+                                    type="number"
+                                    required
+                                  />
+                                  <!-- <mat-error
+                                  *ngIf="
+                                    updateProductForm?.controls?.quantity?.touched &&
+                                    updateProductForm?.controls?.quantity?.invalid
+                                  "
+                                >
+                                  <span
+                                    *ngIf="
+                                      updateProductForm?.controls?.quantity?.errors
+                                        ?.required
+                                    "
+                                  >
+                                    This field is mandatory.
+                                  </span>
+                                </mat-error> -->
+                                </mat-form-field>
+                                <mat-icon
+                                  style="transform: translateY(-10px)"
+                                  color="accent"
+                                  (click)="removeSize(colorIndex, sizeIndex)"
+                                  >delete_outline</mat-icon
+                                >
+                              </div>
+                            </ng-container>
+                          </ng-container>
+                        </ng-container>
+
+                        <div class="div-btn-add-size">
+                          <button
+                            mat-raised-button
+                            type="button"
+                            (click)="addSize(colorIndex)"
+                            color="accent"
+                            class="btn-add-size"
+                          >
+                            <mat-icon>add_circle</mat-icon> Add Size
+                          </button>
+                        </div>
+
+                        <file-upload
+                          formControlName="images"
+                          [multiple]="multiple"
+                          [animation]="animation"
+                        ></file-upload>
+                      </mat-expansion-panel>
+                    </mat-accordion>
+                    <mat-icon color="accent" (click)="removeColor(colorIndex)"
+                      >delete_outline</mat-icon
+                    >
+                  </div>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+
+          <div class="btn-publish-product">
+            <button
+              class="btn-back"
+              matStepperPrevious
+              type="button"
+              color="accent"
+            >
+              Back
+            </button>
+            <button
+              class="btn-next"
+              matStepperNext
+              type="submit"
+              color="accent"
+            >
+              Publish Product
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</form>
